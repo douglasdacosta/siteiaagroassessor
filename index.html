@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza tudo, avisa o gestor e escreve os relatórios da fazenda.">
+<meta property="og:title" content="IA AgroAssessor">
+<meta property="og:description" content="Gestão da fazenda pelo Telegram, com inteligência artificial.">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#2f5d3a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='2' y='6' width='36' height='26' rx='8' fill='%23d9a404'/%3E%3Cpath d='M11 22c3-5 6-7 9-7s6 2 9 7' fill='none' stroke='%2314261b' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+html { scroll-behavior: smooth; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<title>IA AgroAssessor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: lona de sacaria e caderneta. Hero em duas colunas (tese + conversa real no Telegram), depois faixas largas em ritmo de páginas de caderneta. */
+:root {
+  --bg: #f3f5ef;          /* pasto seco claro */
+  --surface: #ffffff;
+  --ink: #14261b;         /* verde mata */
+  --muted: #56655a;
+  --line: #d6dccf;
+  --accent: #d9a404;      /* ipê amarelo */
+  --accent-ink: #1b1600;
+  --field: #2f5d3a;       /* pasto */
+  --field-soft: #e3ecdf;
+  --bubble-in: #ffffff;
+  --bubble-out: #dcefd2;
+  --crit: #b3261e;
+  --warn: #a66300;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1712; --surface: #16211a; --ink: #e6ede4; --muted: #9fb0a2; --line: #2a3a2f;
+    --accent: #f0bd1c; --accent-ink: #1b1600; --field: #8cc79a; --field-soft: #1c2c21;
+    --bubble-in: #1d2a22; --bubble-out: #23402c; --crit: #ff8a80; --warn: #f2b05e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1712; --surface: #16211a; --ink: #e6ede4; --muted: #9fb0a2; --line: #2a3a2f;
+  --accent: #f0bd1c; --accent-ink: #1b1600; --field: #8cc79a; --field-soft: #1c2c21;
+  --bubble-in: #1d2a22; --bubble-out: #23402c; --crit: #ff8a80; --warn: #f2b05e; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.6; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--display); line-height: 0.95; text-wrap: balance; margin: 0; letter-spacing: 0.005em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--field); }
+
+/* Topo */
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 900; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em; }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.top nav { display: flex; gap: 22px; font-size: 15px; color: var(--muted); }
+.top nav a { text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+@media (max-width: 720px) { .top nav { display: none; } }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; padding-block: 36px 72px; }
+.hero > * { min-width: 0; }
+.hero h1 { font-size: clamp(54px, 8.4vw, 104px); font-weight: 900; text-transform: uppercase; }
+.hero h1 em { font-style: normal; color: var(--field); }
+.hero .lede { margin-top: 24px; font-size: 20px; max-width: 34ch; color: var(--muted); }
+.hero .lede strong { color: var(--ink); font-weight: 700; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; padding: 14px 22px; border-radius: 999px; text-decoration: none; border: 2px solid var(--ink); transition: transform .15s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.proof { margin-top: 28px; font-family: var(--mono); font-size: 13px; color: var(--muted); }
+@media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 40px; } }
+
+/* Celular com a conversa */
+.phone { background: var(--surface); border: 1px solid var(--line); border-radius: 30px; padding: 14px; box-shadow: 0 30px 60px -30px rgba(20, 38, 27, 0.45); max-width: 400px; justify-self: center; width: 100%; }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 8px 10px 14px; border-bottom: 1px solid var(--line); }
+.avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--field); display: grid; place-items: center; flex: none; }
+.avatar svg { width: 22px; height: 22px; }
+.chat-head b { display: block; font-size: 15px; }
+.chat-head small { color: var(--muted); font-size: 12.5px; }
+.chat { display: flex; flex-direction: column; gap: 10px; padding: 16px 6px 6px; background: var(--field-soft); border-radius: 18px; margin-top: 12px; }
+.msg { max-width: 86%; padding: 9px 12px; border-radius: 14px; font-size: 14.5px; line-height: 1.45; }
+.msg.out { align-self: flex-end; background: var(--bubble-out); border-bottom-right-radius: 4px; }
+.msg.in { align-self: flex-start; background: var(--bubble-in); border-bottom-left-radius: 4px; }
+.msg time { display: block; text-align: right; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+.audio { display: flex; align-items: center; gap: 8px; }
+.audio .play { width: 26px; height: 26px; border-radius: 50%; background: var(--field); display: grid; place-items: center; flex: none; }
+.audio .wave { display: flex; align-items: center; gap: 2px; height: 22px; }
+.audio .wave i { display: block; width: 3px; border-radius: 2px; background: var(--field); opacity: .7; }
+.audio .dur { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+.transcript { font-style: italic; color: var(--muted); font-size: 13px; margin-top: 6px; }
+.rec { font-family: var(--mono); font-size: 12.5px; line-height: 1.55; }
+.rec .tag { display: inline-block; font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; padding: 1px 7px; border-radius: 999px; background: var(--field); color: var(--surface); margin-bottom: 4px; }
+.rec .tag.crit { background: var(--crit); }
+
+/* Faixas */
+section.band { padding-block: 84px; border-top: 1px solid var(--line); }
+.band-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
+.band-head > * { min-width: 0; }
+.band-head h2 { font-size: clamp(40px, 5.6vw, 68px); font-weight: 800; text-transform: uppercase; margin-top: 10px; }
+.band-head p { color: var(--muted); max-width: 48ch; }
+@media (max-width: 800px) { .band-head { grid-template-columns: 1fr; gap: 16px; } }
+
+/* Como funciona: sequência real */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 2px solid var(--ink); border-radius: 22px; overflow: hidden; }
+.step { padding: 30px 28px 34px; min-width: 0; }
+.step + .step { border-left: 2px solid var(--ink); }
+.step .n { font-family: var(--display); font-weight: 900; font-size: 64px; line-height: 1; color: var(--accent); -webkit-text-stroke: 1.5px var(--ink); }
+.step h3 { font-size: 30px; font-weight: 800; text-transform: uppercase; margin-top: 14px; }
+.step p { margin-top: 10px; color: var(--muted); font-size: 16px; }
+@media (max-width: 800px) { .steps { grid-template-columns: 1fr; } .step + .step { border-left: 0; border-top: 2px solid var(--ink); } }
+
+/* O que registra */
+.cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.cat { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.cat svg { width: 40px; height: 40px; color: var(--field); }
+.cat h3 { font-size: 28px; font-weight: 800; text-transform: uppercase; }
+.cat q { display: block; font-family: var(--mono); font-size: 13px; color: var(--muted); quotes: "“" "”"; border-left: 3px solid var(--accent); padding-left: 10px; }
+.cat ul { margin: 0; padding-left: 18px; font-size: 15px; color: var(--muted); }
+@media (max-width: 960px) { .cats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .cats { grid-template-columns: 1fr; } }
+
+/* Alertas + relatório */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.duo > * { min-width: 0; }
+@media (max-width: 860px) { .duo { grid-template-columns: 1fr; } }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 28px; }
+.panel h3 { font-size: 32px; font-weight: 800; text-transform: uppercase; }
+.panel > p { color: var(--muted); margin-top: 8px; font-size: 16px; }
+.alerts { list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.alerts li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; font-size: 15px; }
+.sev { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; padding: 3px 8px; border-radius: 999px; border: 1.5px solid currentColor; white-space: nowrap; }
+.sev.crit { color: var(--crit); }
+.sev.warn { color: var(--warn); }
+.sev.info { color: var(--field); }
+.alerts small { display: block; color: var(--muted); font-family: var(--mono); font-size: 12px; }
+.report { margin-top: 22px; font-family: var(--mono); font-size: 13.5px; line-height: 1.7; background: var(--field-soft); border-radius: 14px; padding: 18px 20px; overflow-x: auto; white-space: pre; font-variant-numeric: tabular-nums; }
+
+/* Rebanho em números */
+.herd { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+.herd div { padding: 26px 18px; min-width: 0; }
+.herd div + div { border-left: 1px solid var(--line); }
+.herd b { display: block; font-family: var(--display); font-weight: 900; font-size: 58px; line-height: 1; font-variant-numeric: tabular-nums; }
+.herd span { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .herd { grid-template-columns: repeat(2, 1fr); } .herd div:nth-child(3) { border-left: 0; } .herd div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+.bands { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.bands span { font-family: var(--mono); font-size: 12.5px; padding: 6px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
+.note { margin-top: 14px; color: var(--muted); font-size: 14px; }
+
+/* Para quem */
+.who { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.who > div { min-width: 0; border-left: 4px solid var(--accent); padding-left: 20px; }
+.who h3 { font-size: 30px; font-weight: 800; text-transform: uppercase; }
+.who ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+@media (max-width: 760px) { .who { grid-template-columns: 1fr; } }
+
+/* Chamada final */
+.final { background: var(--field); color: #f3f5ef; border-radius: 28px; padding: 56px 44px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 32px; align-items: center; }
+.final > * { min-width: 0; }
+.final h2 { font-size: clamp(42px, 6vw, 76px); font-weight: 900; text-transform: uppercase; }
+.final p { color: #dfe9dc; }
+.final .btn { border-color: #f3f5ef; color: #f3f5ef; }
+.final .btn.primary { color: var(--accent-ink); border-color: var(--accent); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .final { background: #1f3a27; } }
+:root[data-theme="dark"] .final { background: #1f3a27; }
+@media (max-width: 800px) { .final { grid-template-columns: 1fr; padding: 40px 24px; } }
+
+.final .wa { font-family: var(--mono); font-size: 15px; color: #f3f5ef; user-select: all; align-self: center; }
+footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .chat .msg { animation: pop .5s ease both; }
+  .chat .msg:nth-child(2) { animation-delay: .25s; }
+  .chat .msg:nth-child(3) { animation-delay: .5s; }
+  .chat .msg:nth-child(4) { animation-delay: .75s; }
+  @keyframes pop { from { transform: translateY(6px); } to { transform: none; } }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="6" width="36" height="26" rx="8" fill="var(--accent)"/><path d="M12 32 l-2 6 8-6" fill="var(--accent)"/><path d="M11 22c3-5 6-7 9-7s6 2 9 7" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/><path d="M14 16l-3-4M26 16l3-4" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/></svg>
+      IA AgroAssessor
+    </div>
+    <nav aria-label="Seções">
+      <a href="#como">Como funciona</a>
+      <a href="#registra">O que registra</a>
+      <a href="#gestor">Para o gestor</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Gestão da fazenda pelo Telegram</p>
+      <h1>O peão manda o recado. <em>A fazenda fica anotada.</em></h1>
+      <p class="lede">Sua equipe manda texto, foto ou áudio pelo Telegram, do jeito que já fala. <strong>A inteligência artificial entende, organiza e avisa o gestor</strong> quando algo precisa de atenção.</p>
+      <div class="ctas">
+        <a class="btn primary" href="https://wa.me/5514997281751?text=Ol%C3%A1!%20Quero%20conhecer%20o%20IA%20AgroAssessor%20na%20minha%20fazenda." target="_blank" rel="noopener">Quero testar na minha fazenda</a>
+        <a class="btn" href="#como">Ver como funciona</a>
+      </div>
+      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Relatório diário e semanal</p>
+    </div>
+
+    <div class="phone" role="img" aria-label="Exemplo de conversa: o funcionário manda um áudio sobre um nascimento e o bot confirma o registro">
+      <div class="chat-head">
+        <div class="avatar"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9c2.5-3 4.5-4 7-4s4.5 1 7 4"/><path d="M7 6 5 3M17 6l2-3"/><path d="M8 9v5a4 4 0 0 0 8 0V9"/><circle cx="10.5" cy="17" r=".6" fill="#fff"/><circle cx="13.5" cy="17" r=".6" fill="#fff"/></svg></div>
+        <div><b>IA AgroAssessor</b><small>bot da Fazenda Santa Luzia</small></div>
+      </div>
+      <div class="chat">
+        <div class="msg out">
+          <div class="audio">
+            <span class="play"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" fill="#fff"/></svg></span>
+            <span class="wave" aria-hidden="true"><i style="height:8px"></i><i style="height:14px"></i><i style="height:20px"></i><i style="height:12px"></i><i style="height:18px"></i><i style="height:9px"></i><i style="height:16px"></i><i style="height:22px"></i><i style="height:11px"></i><i style="height:15px"></i><i style="height:7px"></i><i style="height:13px"></i><i style="height:19px"></i><i style="height:10px"></i></span>
+            <span class="dur">0:09</span>
+          </div>
+          <p class="transcript">“Nasceu um bezerro da vaca 7, já curei o umbigo e marquei. O número dele é 152.”</p>
+          <time>06:42</time>
+        </div>
+        <div class="msg in">
+          <div class="rec"><span class="tag">Rebanho · nascimento</span><br>Mãe: vaca 7<br>Cria: 152 · bezerro<br>Feito: cura do umbigo, marcação</div>
+          <time>06:42</time>
+        </div>
+        <div class="msg out">Trator 3 parou no talhão 5, pneu furado<time>07:15</time></div>
+        <div class="msg in">
+          <div class="rec"><span class="tag crit">Alerta crítico</span><br>Trator 3 parado · pneu<br>Gestor avisado agora.</div>
+          <time>07:15</time>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="band" id="como">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Como funciona</p>
+        <h2>Do recado ao relatório, sem planilha</h2>
+      </div>
+      <p>Ninguém precisa preencher formulário. O funcionário fala como falaria com o capataz, e o sistema faz o resto.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>A equipe manda</h3>
+        <p>Texto, foto ou áudio no Telegram, direto do pasto, da oficina ou do galpão. Áudio é transcrito automaticamente.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>A IA organiza</h3>
+        <p>Cada recado vira um registro com categoria, animal, máquina ou insumo e gravidade. Se faltar dado, o bot pergunta de volta.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>O gestor decide</h3>
+        <p>Alerta na hora para o que é grave, painel sempre atualizado e relatório no fim do dia e toda segunda de manhã.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="registra">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">O que registra</p>
+        <h2>Tudo que acontece na fazenda</h2>
+      </div>
+      <p>As categorias vêm prontas e você pode criar as suas no painel, como Pessoal, Cerca ou Água.</p>
+    </div>
+    <div class="cats">
+      <article class="cat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9c2.5-3 4.5-4 7-4s4.5 1 7 4"/><path d="M7 6 5 3M17 6l2-3"/><path d="M8 9v5a4 4 0 0 0 8 0V9"/><circle cx="10.5" cy="17" r=".6"/><circle cx="13.5" cy="17" r=".6"/></svg>
+        <h3>Rebanho</h3>
+        <q>Vaca 50 com corte na perna</q>
+        <ul><li>Nascimentos, mortes e tratamentos</li><li>Touro, matriz, novilha, bezerro e bezerra</li><li>Ficha e histórico de cada animal</li></ul>
+      </article>
+      <article class="cat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="17" r="3"/><circle cx="18" cy="18" r="2"/><path d="M4 14V8h6l2 5h6l2 3"/><path d="M10 8V5h3"/></svg>
+        <h3>Máquinas</h3>
+        <q>Quebrou a grade, plantadeira parada</q>
+        <ul><li>Tratores, caminhões e implementos</li><li>Parada, em manutenção ou operando</li><li>Quebras repetidas aparecem no relatório</li></ul>
+      </article>
+      <article class="cat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12l1 5H5z"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/></svg>
+        <h3>Insumos</h3>
+        <q>Faltou sal no trato da manhã</q>
+        <ul><li>Diesel, sal, ração, defensivos</li><li>Entradas, saídas e estoque mínimo</li><li>Aviso quando algo acaba</li></ul>
+      </article>
+      <article class="cat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V10"/><path d="M12 14c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 11c0-3 2-5 5-5 0 3-2 5-5 5z"/><path d="M4 21h16"/></svg>
+        <h3>Lavoura</h3>
+        <q>Praga na soja do talhão 4</q>
+        <ul><li>Plantio, aplicações e colheita</li><li>Ocorrências por talhão</li><li>Chuva e clima do dia</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="gestor">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Para o gestor</p>
+        <h2>Fique sabendo antes de virar prejuízo</h2>
+      </div>
+      <p>O que é grave chega na hora no seu Telegram. O resto vira relatório, escrito em português claro.</p>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>Alertas na hora</h3>
+        <p>Você define o que é crítico no painel.</p>
+        <ul class="alerts">
+          <li><span class="sev crit">Crítico</span><div>Trator 3 parado no talhão 5, pneu furado<small>João · 07:15</small></div></li>
+          <li><span class="sev crit">Crítico</span><div>Vaca 50 com corte na perna traseira<small>Zé · 08:02</small></div></li>
+          <li><span class="sev warn">Atenção</span><div>Faltou sal no trato da manhã (3ª vez na semana)<small>Pedro · 09:30</small></div></li>
+          <li><span class="sev info">Info</span><div>Bezerro 152 nascido da vaca 7, curado e marcado<small>João · 06:42</small></div></li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Relatório da semana</h3>
+        <p>Toda segunda às 7h no Telegram, e guardado no painel.</p>
+<div class="report">🐄 Rebanho
+• Vivos: 182
+• Matrizes: 96 · Novilhas: 31 · Touros: 4
+• Bezerros: 27 · Bezerras: 24
+• Nascimentos: 6 na semana · 19 no mês
+• Mortes: 1 no mês · 4 no ano
+
+🚜 Máquinas
+• Trator 3: 2 quebras em 5 dias.
+  Avaliar manutenção.
+
+🧂 Insumos
+• Sal faltou 3 vezes.
+  Rever a compra semanal.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Rebanho em números</p>
+        <h2>Indicadores que se atualizam sozinhos</h2>
+      </div>
+      <p>Cada nascimento e cada morte avisados pelo Telegram já entram na conta. Também dá para consultar pelo bot com /rebanho.</p>
+    </div>
+    <div class="herd">
+      <div><b>6</b><span>nascimentos na semana</span></div>
+      <div><b>19</b><span>nascimentos no mês</span></div>
+      <div><b>1</b><span>morte no mês</span></div>
+      <div><b>4</b><span>mortes no ano</span></div>
+    </div>
+    <div class="bands" aria-label="Faixas de idade das crias">
+      <span>0 a 4 meses: 22</span><span>5 a 7 meses: 14</span><span>8 a 12 meses: 15</span><span>13 a 24 meses: 31</span><span>mais de 24 meses: 100</span>
+    </div>
+    <p class="note">Números de exemplo.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="who">
+      <div>
+        <h3>Para a equipe</h3>
+        <ul>
+          <li>Usa o Telegram que já tem no celular</li>
+          <li>Pode mandar áudio, sem digitar</li>
+          <li>Recebe a confirmação de cada recado</li>
+          <li>Corrige os próprios registros pelo bot</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Para o dono e o gestor</h3>
+        <ul>
+          <li>Painel web com gráficos e histórico</li>
+          <li>Ficha de cada animal, máquina e insumo</li>
+          <li>Só o gestor altera dados de todos</li>
+          <li>Relatórios diário e semanal escritos pela IA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contato">
+  <div class="wrap">
+    <div class="final">
+      <div>
+        <h2>Ponha sua fazenda para conversar</h2>
+        <p style="margin-top:14px">Estamos abrindo vagas para fazendas piloto. A gente configura o bot, cadastra a equipe e acompanha as primeiras semanas.</p>
+      </div>
+      <div class="ctas" style="margin-top:0; flex-direction: column; align-items: flex-start;">
+        <a class="btn primary" href="https://wa.me/5514997281751?text=Ol%C3%A1!%20Quero%20conhecer%20o%20IA%20AgroAssessor%20na%20minha%20fazenda." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <span class="wa">WhatsApp: (14) 99728-1751</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <span>IA AgroAssessor · gestão da fazenda pelo Telegram</span>
+    <span>WhatsApp: (14) 99728-1751</span>
+  </footer>
+</div>
+</body>
+</html>
