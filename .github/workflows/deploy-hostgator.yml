@@ -15,6 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Definir pasta no servidor
+        id: dir
+        env:
+          DIR: ${{ vars.FTP_SERVER_DIR }}
+        run: |
+          d="${DIR:-public_html/}"
+          d="${d#/}"
+          case "$d" in */) ;; *) d="$d/" ;; esac
+          echo "path=$d" >> "$GITHUB_OUTPUT"
+          echo "Pasta de destino: $d"
+
       - name: Enviar arquivos por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -22,7 +33,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
-          server-dir: ${{ vars.FTP_SERVER_DIR || 'public_html/' }}
+          server-dir: ${{ steps.dir.outputs.path }}
           exclude: |
             **/.git*
             **/.git*/**
