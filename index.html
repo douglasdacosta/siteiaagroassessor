@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza tudo, avisa o gestor e escreve os relatórios da fazenda.">
+<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza rebanho, engorda, máquinas e estoque, avisa o gestor e escreve os relatórios da fazenda.">
 <meta property="og:title" content="IA AgroAssessor">
 <meta property="og:description" content="Gestão da fazenda pelo Telegram, com inteligência artificial.">
 <meta property="og:locale" content="pt_BR">
@@ -202,6 +202,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
     <nav aria-label="Seções">
       <a href="#como">Como funciona</a>
       <a href="#registra">O que registra</a>
+      <a href="#engorda">Engorda</a>
       <a href="#gestor">Para o gestor</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -216,7 +217,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <a class="btn primary" href="https://wa.me/5514997281751?text=Ol%C3%A1!%20Quero%20conhecer%20o%20IA%20AgroAssessor%20na%20minha%20fazenda." target="_blank" rel="noopener">Quero testar na minha fazenda</a>
         <a class="btn" href="#como">Ver como funciona</a>
       </div>
-      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Relatório diário e semanal</p>
+      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Engorda e estoque · Relatório diário e semanal</p>
     </div>
 
     <div class="phone" role="img" aria-label="Exemplo de conversa: o funcionário manda um áudio sobre um nascimento e o bot confirma o registro">
@@ -291,19 +292,19 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9c2.5-3 4.5-4 7-4s4.5 1 7 4"/><path d="M7 6 5 3M17 6l2-3"/><path d="M8 9v5a4 4 0 0 0 8 0V9"/><circle cx="10.5" cy="17" r=".6"/><circle cx="13.5" cy="17" r=".6"/></svg>
         <h3>Rebanho</h3>
         <q>Vaca 50 com corte na perna</q>
-        <ul><li>Nascimentos, mortes e tratamentos</li><li>Touro, matriz, novilha, bezerro e bezerra</li><li>Ficha e histórico de cada animal</li></ul>
+        <ul><li>Nascimentos, mortes, tratamentos e descarte</li><li>Brinco na cria sem duplicar o nascimento</li><li>Matrizes sem cria no ano em destaque</li><li>Ficha e histórico de cada animal</li></ul>
       </article>
       <article class="cat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="17" r="3"/><circle cx="18" cy="18" r="2"/><path d="M4 14V8h6l2 5h6l2 3"/><path d="M10 8V5h3"/></svg>
         <h3>Máquinas</h3>
         <q>Quebrou a grade, plantadeira parada</q>
-        <ul><li>Tratores, caminhões e implementos</li><li>Parada, em manutenção ou operando</li><li>Quebras repetidas aparecem no relatório</li></ul>
+        <ul><li>Tratores, caminhões e implementos</li><li>Parada, em manutenção ou operando</li><li>Horímetro e quilometragem</li><li>Quebras repetidas aparecem no relatório</li></ul>
       </article>
       <article class="cat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12l1 5H5z"/><path d="M5 9v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M10 13h4"/></svg>
         <h3>Insumos</h3>
-        <q>Faltou sal no trato da manhã</q>
-        <ul><li>Diesel, sal, ração, defensivos</li><li>Entradas, saídas e estoque mínimo</li><li>Aviso quando algo acaba</li></ul>
+        <q>Chegaram 100 sacos de proteinado</q>
+        <ul><li>Diesel, sal, ração, vacinas, defensivos</li><li>Cada uso já sai do estoque, sozinho</li><li>Estoque mínimo e aviso quando acaba</li></ul>
       </article>
       <article class="cat">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V10"/><path d="M12 14c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 11c0-3 2-5 5-5 0 3-2 5-5 5z"/><path d="M4 21h16"/></svg>
@@ -311,6 +312,59 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <q>Praga na soja do talhão 4</q>
         <ul><li>Plantio, aplicações e colheita</li><li>Ocorrências por talhão</li><li>Chuva e clima do dia</li></ul>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="engorda">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Engorda</p>
+        <h2>Do lote na balança ao boi vendido</h2>
+      </div>
+      <p>Separe os animais em lotes, lance a pesagem toda semana e acompanhe quanto falta para o peso de venda. Ração e vacina do lote valem para cada animal e saem do estoque.</p>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>Pelo Telegram</h3>
+        <p>Pesagem, manejo e entrada de animais no lote, falando do jeito de sempre.</p>
+        <div class="chat" style="margin-top:22px">
+          <div class="msg out">Pesagem do lote fevereiro, deu 2 toneladas<time>07:10</time></div>
+          <div class="msg in">
+            <div class="rec"><span class="tag">Engorda · pesagem do lote</span><br>Lote fevereiro: 2.000 kg em 4 cabeças<br>Média 500 kg (+25 kg desde 13/10)</div>
+            <time>07:10</time>
+          </div>
+          <div class="msg out">Vacinei o lote contra brucelose<time>07:32</time></div>
+          <div class="msg in">
+            <div class="rec"><span class="tag">Engorda · manejo</span><br>Vacina brucelose: 4 doses, 1 por animal<br>Estoque: 996 doses</div>
+            <time>07:32</time>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>No painel</h3>
+        <p>Por lote e por animal, com gráfico do peso médio.</p>
+<div class="report">🐂 Lote fevereiro · 4 cabeças
+• Peso médio: 500 kg
+• Meta: 540 kg por animal
+• Ganho médio diário: 1,3 kg/dia
+• Chega na meta em ~31 dias
+• Carcaça estimada: 67 @
+
+🌾 Manejos do lote
+• Ração: 40 sacos (10/animal)
+• Vacina: 4 doses
+• Custos lançados: R$ 2.460
+
+💰 Venda
+• 4 cabeças · R$ 24.000
+• Comprador: frigorífico
+• R$ 6.000 por cabeça
+• R$ 360 por @
+• Resultado: R$ 21.540</div>
+        <p class="note">Pesagem por animal ou do lote inteiro. Números de exemplo.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -332,6 +386,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
           <li><span class="sev crit">Crítico</span><div>Trator 3 parado no talhão 5, pneu furado<small>João · 07:15</small></div></li>
           <li><span class="sev crit">Crítico</span><div>Vaca 50 com corte na perna traseira<small>Zé · 08:02</small></div></li>
           <li><span class="sev warn">Atenção</span><div>Faltou sal no trato da manhã (3ª vez na semana)<small>Pedro · 09:30</small></div></li>
+          <li><span class="sev warn">Atenção</span><div>Vacina brucelose abaixo do estoque mínimo<small>Estoque · 10:05</small></div></li>
           <li><span class="sev info">Info</span><div>Bezerro 152 nascido da vaca 7, curado e marcado<small>João · 06:42</small></div></li>
         </ul>
       </div>
@@ -389,13 +444,16 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
           <li>Pode mandar áudio, sem digitar</li>
           <li>Recebe a confirmação de cada recado</li>
           <li>Corrige os próprios registros pelo bot</li>
+          <li>Se faltar algo, o bot pergunta de volta</li>
         </ul>
       </div>
       <div>
         <h3>Para o dono e o gestor</h3>
         <ul>
           <li>Painel web com gráficos e histórico</li>
+          <li>Rebanho, engorda, máquinas e estoque num lugar só</li>
           <li>Ficha de cada animal, máquina e insumo</li>
+          <li>Áudio que a IA não entendeu fica para você ouvir</li>
           <li>Só o gestor altera dados de todos</li>
           <li>Relatórios diário e semanal escritos pela IA</li>
         </ul>
