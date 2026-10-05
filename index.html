@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza rebanho, engorda, máquinas e estoque, avisa o gestor e escreve os relatórios da fazenda.">
+<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza rebanho, engorda, plantações, máquinas e estoque, avisa o gestor e escreve os relatórios da fazenda.">
 <meta property="og:title" content="IA AgroAssessor">
 <meta property="og:description" content="Gestão da fazenda pelo Telegram, com inteligência artificial.">
 <meta property="og:locale" content="pt_BR">
@@ -203,6 +203,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
       <a href="#como">Como funciona</a>
       <a href="#registra">O que registra</a>
       <a href="#engorda">Engorda</a>
+      <a href="#plantacoes">Plantações</a>
       <a href="#gestor">Para o gestor</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -217,7 +218,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <a class="btn primary" href="https://wa.me/5514997281751?text=Ol%C3%A1!%20Quero%20conhecer%20o%20IA%20AgroAssessor%20na%20minha%20fazenda." target="_blank" rel="noopener">Quero testar na minha fazenda</a>
         <a class="btn" href="#como">Ver como funciona</a>
       </div>
-      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Engorda e estoque · Relatório diário e semanal</p>
+      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Engorda, plantações e estoque · Relatório diário e semanal</p>
     </div>
 
     <div class="phone" role="img" aria-label="Exemplo de conversa: o funcionário manda um áudio sobre um nascimento e o bot confirma o registro">
@@ -310,7 +311,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21V10"/><path d="M12 14c-3 0-5-2-5-5 3 0 5 2 5 5z"/><path d="M12 11c0-3 2-5 5-5 0 3-2 5-5 5z"/><path d="M4 21h16"/></svg>
         <h3>Lavoura</h3>
         <q>Praga na soja do talhão 4</q>
-        <ul><li>Plantio, aplicações e colheita</li><li>Ocorrências por talhão</li><li>Chuva e clima do dia</li></ul>
+        <ul><li>Lotes por talhão, pomar ou estufa</li><li>Plantio, adubo, defensivo e colheita</li><li>Praga avisa o gestor</li><li>Chuva e clima do dia</li></ul>
       </article>
     </div>
   </div>
@@ -364,6 +365,66 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
 • R$ 360 por @
 • Resultado: R$ 21.540</div>
         <p class="note">Pesagem por animal ou do lote inteiro. Números de exemplo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="plantacoes">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Plantações</p>
+        <h2>Do plantio à colheita, lote por lote</h2>
+      </div>
+      <p>Soja, milho, cana, laranja, abacate ou tomate na estufa: cada cultura vira um lote no seu talhão, pomar ou estufa. Semente, adubo, defensivo e diesel saem do estoque, com a dose por hectare e as horas de máquina.</p>
+    </div>
+    <div class="duo">
+      <div class="panel">
+        <h3>Pelo Telegram</h3>
+        <p>Plantio, aplicação, colheita e praga, do jeito que a equipe já fala. No primeiro plantio o lote é criado sozinho.</p>
+        <div class="chat" style="margin-top:22px">
+          <div class="msg out">Plantei soja no talhão 3, 144 sacos de semente<time>06:50</time></div>
+          <div class="msg in">
+            <div class="rec"><span class="tag">Plantações · plantio</span><br>Lote Soja talhão 3 26/27 criado<br>Semente: 144 sacos (3 sacos/ha)<br>Estoque: 256 sacos</div>
+            <time>06:50</time>
+          </div>
+          <div class="msg out">Passei 96 litros de glifosato no talhão 3 com o trator 3, 6 horas<time>14:05</time></div>
+          <div class="msg in">
+            <div class="rec"><span class="tag">Plantações · defensivo</span><br>Glifosato: 96 L (2 L/ha)<br>Trator 3: 6 h</div>
+            <time>14:05</time>
+          </div>
+          <div class="msg out">Colhi 80 caixas de tomate na estufa 2<time>17:20</time></div>
+          <div class="msg in">
+            <div class="rec"><span class="tag">Plantações · colheita</span><br>Tomate estufa 2: 80 cx<br>Total do ciclo: 535 cx (8,9 kg/m²)</div>
+            <time>17:20</time>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>No painel</h3>
+        <p>Custo, produtividade e resultado de cada lote. No pomar, cada safra separada.</p>
+<div class="report">🌱 Soja talhão 3 · safra 26/27
+• 48 ha, plantada há 7 dias
+• Colheita em 122 dias
+• Custo: R$ 2.502/ha
+• Semente: 3 sc/ha
+• MAP: 300 kg/ha
+• Diesel: 7,9 L/ha
+• Trator 3: 22 h
+
+🍊 Laranja pomar 1 · 12 ha
+• 4.800 pés
+• Safra 25/26: 775 cx/ha
+• 79 kg por pé
+• R$ 5,27 por caixa
+• Venda: R$ 334.800
+• Resultado: R$ 285.800
+
+🍅 Tomate estufa 2 · 1.200 m²
+• 7,6 kg/m²
+• R$ 8,13 por caixa</div>
+        <p class="note">Anual, perene, cana ou ciclo curto na estufa, no mesmo lugar. Números de exemplo.</p>
       </div>
     </div>
   </div>
@@ -451,7 +512,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <h3>Para o dono e o gestor</h3>
         <ul>
           <li>Painel web com gráficos e histórico</li>
-          <li>Rebanho, engorda, máquinas e estoque num lugar só</li>
+          <li>Rebanho, engorda, plantações, máquinas e estoque num lugar só</li>
           <li>Ficha de cada animal, máquina e insumo</li>
           <li>Áudio que a IA não entendeu fica para você ouvir</li>
           <li>Só o gestor altera dados de todos</li>
