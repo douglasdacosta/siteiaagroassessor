@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Guia de uso do IA AgroAssessor: como a equipe usa o bot no Telegram e o que dá para fazer em cada tela do painel.">
+<meta property="og:title" content="Guia de uso · IA AgroAssessor">
+<meta property="og:locale" content="pt_BR">
+<meta name="theme-color" content="#2f5d3a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='2' y='6' width='36' height='26' rx='8' fill='%23d9a404'/%3E%3Cpath d='M11 22c3-5 6-7 9-7s6 2 9 7' fill='none' stroke='%2314261b' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>Guia de uso · IA AgroAssessor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Mesma identidade do site: pasto seco, verde mata e ipê. Página de leitura: índice fixo à esquerda, texto em coluna estreita. */
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+:root {
+  --bg: #f3f5ef; --surface: #ffffff; --ink: #14261b; --muted: #56655a; --line: #d6dccf;
+  --accent: #d9a404; --accent-ink: #1b1600; --field: #2f5d3a; --field-soft: #e3ecdf;
+  --crit: #b3261e; --warn: #a66300;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1712; --surface: #16211a; --ink: #e6ede4; --muted: #9fb0a2; --line: #2a3a2f;
+    --accent: #f0bd1c; --field: #8cc79a; --field-soft: #1c2c21; --crit: #ff8a80; --warn: #f2b05e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1712; --surface: #16211a; --ink: #e6ede4; --muted: #9fb0a2; --line: #2a3a2f;
+  --accent: #f0bd1c; --field: #8cc79a; --field-soft: #1c2c21; --crit: #ff8a80; --warn: #f2b05e; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+h1, h2, h3 { font-family: var(--display); line-height: 0.95; text-wrap: balance; margin: 0; }
+.eyebrow { font-family: var(--mono); font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--field); margin: 0; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 900; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em; text-decoration: none; }
+.brand svg { width: 34px; height: 34px; flex: none; }
+.top a.back { font-size: 15px; color: var(--muted); text-decoration: none; }
+.top a.back:hover { color: var(--ink); }
+
+.intro { padding-block: 28px 44px; border-bottom: 1px solid var(--line); }
+.intro h1 { font-size: clamp(34px, 9vw, 92px); font-weight: 900; text-transform: uppercase; margin-top: 0.3em; overflow-wrap: anywhere; }
+.intro p { margin: 20px 0 0; font-size: 19px; color: var(--muted); max-width: 60ch; }
+.paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.paths a { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; text-decoration: none; min-width: 0; }
+.paths a:hover { border-color: var(--field); }
+.paths b { display: block; font-family: var(--display); font-size: 26px; font-weight: 800; text-transform: uppercase; line-height: 1; }
+.paths span { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+
+.layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 56px; padding-block: 44px 64px; }
+.toc { position: sticky; top: 20px; align-self: start; max-height: calc(100vh - 40px); overflow-y: auto; font-size: 15px; }
+.toc p { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 18px 0 6px; }
+.toc p:first-child { margin-top: 0; }
+.toc a { display: block; padding: 4px 0 4px 12px; border-left: 2px solid var(--line); text-decoration: none; color: var(--muted); }
+.toc a:hover { color: var(--ink); border-left-color: var(--field); }
+details.toc-mobile { display: none; }
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; gap: 0; padding-top: 24px; }
+  .toc { display: none; }
+  details.toc-mobile { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; margin-bottom: 28px; }
+  details.toc-mobile summary { font-weight: 700; cursor: pointer; }
+  details.toc-mobile .cols { columns: 2; column-gap: 20px; margin-top: 10px; font-size: 15px; }
+  details.toc-mobile a { display: block; padding: 3px 0; text-decoration: none; color: var(--muted); break-inside: avoid; }
+}
+
+main section { padding-bottom: 40px; margin-bottom: 40px; border-bottom: 1px solid var(--line); }
+main section:last-child { border-bottom: 0; }
+main h2 { font-size: clamp(36px, 5vw, 54px); font-weight: 800; text-transform: uppercase; margin-top: 8px; }
+main h3 { font-size: 28px; font-weight: 800; text-transform: uppercase; margin: 32px 0 0; }
+main p, main ul, main ol { margin: 14px 0 0; max-width: 70ch; }
+main ul, main ol { padding-left: 22px; }
+main li + li { margin-top: 6px; }
+main .lead { font-size: 18px; color: var(--muted); }
+b.ui { font-weight: 700; }
+code, kbd { font-family: var(--mono); font-size: 0.86em; background: var(--field-soft); padding: 1px 6px; border-radius: 6px; }
+
+.say { margin: 16px 0 0; display: grid; gap: 8px; max-width: 70ch; }
+.say div { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px; padding: 10px 14px; font-size: 15.5px; }
+.say div small { display: block; font-family: var(--mono); font-size: 11.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--field); }
+
+.tip { margin: 18px 0 0; max-width: 70ch; background: var(--field-soft); border-radius: 12px; padding: 14px 16px; font-size: 15.5px; }
+.tip b:first-child { color: var(--field); }
+.warn { background: transparent; border: 1.5px solid var(--warn); }
+.warn b:first-child { color: var(--warn); }
+
+table { border-collapse: collapse; width: 100%; max-width: 70ch; margin-top: 16px; font-size: 15px; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 500; }
+.table-scroll { overflow-x: auto; }
+
+.steps { counter-reset: s; list-style: none; padding-left: 0 !important; }
+.steps li { counter-increment: s; position: relative; padding-left: 44px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 700; display: grid; place-items: center; font-size: 15px; }
+
+footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="6" width="36" height="26" rx="8" fill="var(--accent)"/><path d="M12 32 l-2 6 8-6" fill="var(--accent)"/><path d="M11 22c3-5 6-7 9-7s6 2 9 7" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/><path d="M14 16l-3-4M26 16l3-4" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/></svg>
+      IA AgroAssessor
+    </a>
+    <a class="back" href="./">← Voltar ao site</a>
+  </header>
+
+  <div class="intro">
+    <p class="eyebrow">Guia de uso</p>
+    <h1>Como usar o IA AgroAssessor</h1>
+    <p>A equipe manda os recados pelo Telegram e o gestor acompanha tudo no painel. Este guia mostra o que mandar no bot e o que dá para fazer em cada tela.</p>
+    <div class="paths">
+      <a href="#comecar"><b>Primeiro acesso</b><span>Liberar a equipe e entrar no painel.</span></a>
+      <a href="#bot"><b>Sou da equipe</b><span>O que mandar no Telegram e o que o bot responde.</span></a>
+      <a href="#painel"><b>Sou gestor</b><span>Cada tela do painel, alertas e relatórios.</span></a>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Índice">
+      <p>Começo</p>
+      <a href="#comecar">Primeiro acesso</a>
+      <p>Telegram</p>
+      <a href="#bot">Mandando recados</a>
+      <a href="#exemplos">Exemplos por assunto</a>
+      <a href="#respostas">Respostas e perguntas</a>
+      <a href="#audio">Áudios</a>
+      <a href="#correcoes">Correções</a>
+      <a href="#comandos">Comandos do gestor</a>
+      <a href="#avisos">Alertas e relatórios</a>
+      <p>Painel</p>
+      <a href="#painel">Painel</a>
+      <a href="#registros">Registros</a>
+      <a href="#rebanho">Rebanho</a>
+      <a href="#engorda">Engorda</a>
+      <a href="#plantacoes">Plantações</a>
+      <a href="#maquinario">Maquinário</a>
+      <a href="#insumos">Insumos</a>
+      <a href="#alertas">Alertas</a>
+      <a href="#audios">Áudios</a>
+      <a href="#relatorios">Relatórios</a>
+      <a href="#equipe">Equipe</a>
+      <a href="#categorias">Categorias</a>
+      <p>Mais</p>
+      <a href="#custos">Como os custos são calculados</a>
+      <a href="#duvidas">Dúvidas frequentes</a>
+    </nav>
+
+    <main>
+      <details class="toc-mobile">
+        <summary>Índice do guia</summary>
+        <div class="cols">
+          <a href="#comecar">Primeiro acesso</a><a href="#bot">Mandando recados</a><a href="#exemplos">Exemplos</a><a href="#respostas">Respostas</a>
+          <a href="#audio">Áudios no bot</a><a href="#correcoes">Correções</a><a href="#comandos">Comandos</a><a href="#avisos">Alertas e relatórios</a>
+          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#engorda">Engorda</a>
+          <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#insumos">Insumos</a><a href="#alertas">Alertas</a>
+          <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a>
+          <a href="#custos">Custos</a><a href="#duvidas">Dúvidas</a>
+        </div>
+      </details>
+
+      <section id="comecar">
+        <p class="eyebrow">Começo</p>
+        <h2>Primeiro acesso</h2>
+        <p class="lead">O painel fica em <a href="https://crm.iaagroassessor.com.br">crm.iaagroassessor.com.br</a>. O acesso do gestor (e-mail e senha) é criado por nós na implantação.</p>
+        <h3>Liberar uma pessoa da equipe no bot</h3>
+        <ol class="steps">
+          <li>A pessoa abre o bot da fazenda no Telegram e manda qualquer mensagem.</li>
+          <li>Como ainda não está cadastrada, o bot responde com o número dela: <em>“Seu usuário ainda não está cadastrado. Peça ao gestor para liberar o ID 123456789.”</em></li>
+          <li>No painel, em <b class="ui">Equipe</b>, o gestor preenche <b class="ui">Nome</b>, cola o <b class="ui">ID do Telegram</b>, escolhe a <b class="ui">Função</b> e clica em <b class="ui">Adicionar</b>.</li>
+          <li>A pessoa manda <code>/start</code> no bot e recebe: <em>“Olá, Nome! Pode mandar suas anotações por texto, foto ou áudio.”</em> Pronto.</li>
+        </ol>
+        <div class="tip"><b>Funcionário ou gestor?</b> Funcionário manda recados. Gestor também manda, e além disso recebe os alertas críticos e os relatórios no Telegram, usa os comandos de resumo e pode corrigir o que qualquer pessoa lançou.</div>
+      </section>
+
+      <section id="bot">
+        <p class="eyebrow">Telegram</p>
+        <h2>Mandando recados</h2>
+        <p class="lead">Fale do jeito que falaria com o capataz. Não precisa de formulário nem de palavra certa.</p>
+        <ul>
+          <li><b>Texto, áudio ou foto.</b> Na foto, escreva a legenda: é ela que o sistema lê.</li>
+          <li><b>Vários assuntos na mesma mensagem.</b> “Acabou o diesel e o trator 3 parou” vira dois registros: um em Insumos e outro em Máquinas.</li>
+          <li><b>Diga o número ou o nome.</b> Brinco do animal, número do trator, nome do talhão, nome do lote. Quanto mais claro, menos o bot precisa perguntar.</li>
+          <li><b>Quantidade com unidade.</b> “100 sacos”, “300 litros”, “2 toneladas”, “15 arrobas”. Arroba conta como 15 kg.</li>
+        </ul>
+      </section>
+
+      <section id="exemplos">
+        <p class="eyebrow">Telegram</p>
+        <h2>Exemplos por assunto</h2>
+
+        <h3>Rebanho</h3>
+        <div class="say">
+          <div><small>Nascimento</small>Nasceu um bezerro da vaca 7, já curei o umbigo. O número dele é 152.</div>
+          <div><small>Brinco numa cria que já nasceu</small>Coloquei o brinco 24 no bezerro da vaca 64.</div>
+          <div><small>Morte</small>A vaca 50 morreu, picada de cobra.</div>
+          <div><small>Descarte</small>Vaca 154 pro descarte, está vazia. / Tira a 154 do descarte.</div>
+          <div><small>Pesagem de um animal</small>Pesei a novilha 24 com 320 kg e a vaca 10 com 410.</div>
+          <div><small>Correção de cadastro</small>A vaca 75 nasceu em 24/03/2023.</div>
+        </div>
+        <p>Se a vaca já tem cria recente, uma mensagem sobre o bezerro dela atualiza essa cria em vez de cadastrar outro nascimento.</p>
+
+        <h3>Engorda</h3>
+        <div class="say">
+          <div><small>Pesagem do lote inteiro</small>Pesagem do lote fevereiro, deu 2 toneladas.</div>
+          <div><small>Manejo do lote</small>Dei 10 sacos de proteinado pro lote fevereiro. / Vacinei o lote contra brucelose.</div>
+          <div><small>Animais no lote</small>Coloca a 30 e a 31 no lote fevereiro.</div>
+        </div>
+        <p>O lote é achado pelo nome do jeito que você fala (“lote fevereiro” acha “Engorda fevereiro”). Com um só lote aberto, nem precisa dizer o nome. Se o lote não existir, “coloca a 30 no lote março” cria o lote. Vacina ou remédio sem quantidade conta uma dose por animal e sai do estoque.</p>
+
+        <h3>Plantações</h3>
+        <div class="say">
+          <div><small>Plantio</small>Plantei soja no talhão 3, 40 sacos de semente.</div>
+          <div><small>Aplicação ou serviço</small>Passei 200 kg de ureia no milho do talhão 2, trator 3, 4 horas.</div>
+          <div><small>Colheita</small>Colhi 1.200 sacas de soja no talhão 3.</div>
+          <div><small>Praga</small>Apareceu lagarta na soja do talhão 4.</div>
+        </div>
+        <p>No primeiro plantio, a área e o lote são criados sozinhos. A semente, o adubo e o defensivo saem do estoque. A resposta mostra a dose por hectare, o custo e o saldo do estoque.</p>
+
+        <h3>Máquinas</h3>
+        <div class="say">
+          <div><small>Quebra</small>Trator 3 parou no talhão 5, pneu furado.</div>
+          <div><small>Volta a operar</small>O trator 3 voltou, já trocaram o pneu.</div>
+          <div><small>Uso e horímetro</small>Trator 3 está com 4.520 horas.</div>
+        </div>
+
+        <h3>Insumos</h3>
+        <div class="say">
+          <div><small>Entrada</small>Chegaram 100 sacos de proteinado, R$ 95 o saco.</div>
+          <div><small>Consumo</small>Usei 2 sacos de sal no cocho.</div>
+          <div><small>Contagem</small>Tem 300 litros de diesel no tanque.</div>
+          <div><small>Faltou</small>Acabou o diesel.</div>
+        </div>
+        <p>Máquinas e insumos que ainda não existem no cadastro são criados na primeira vez que aparecem.</p>
+      </section>
+
+      <section id="respostas">
+        <p class="eyebrow">Telegram</p>
+        <h2>Respostas e perguntas</h2>
+        <ul>
+          <li><b>✅ Registrado:</b> cada registro vem numa linha, com o resumo do que foi entendido.</li>
+          <li><b>ℹ️</b> mostra o que mudou nos cadastros (animal, máquina, estoque, lote) ou o que foi recusado.</li>
+          <li><b>❓</b> é uma pergunta: faltou algo para registrar. Responda na mensagem seguinte, em até 30 minutos, que o bot junta as duas.</li>
+          <li><em>“Recebido, mas não consegui identificar o registro. Pode detalhar?”</em> Mande de novo com mais detalhes.</li>
+          <li><em>“⚠️ Não consegui processar sua mensagem agora. O gestor vai verificar no painel.”</em> Deu erro do nosso lado; o gestor vê no painel.</li>
+        </ul>
+        <div class="tip"><b>Dica:</b> sempre confira a resposta. Se o bot entendeu errado, mande a correção logo em seguida.</div>
+      </section>
+
+      <section id="audio">
+        <p class="eyebrow">Telegram</p>
+        <h2>Áudios</h2>
+        <p>O áudio é transcrito automaticamente e tratado como se fosse texto. Se não der para transcrever (áudio mudo, muito barulho ou falha), o bot responde <em>“🎙️ Áudio recebido! Ele vai para o gestor ouvir no painel.”</em> e o áudio aparece na tela <a href="#audios">Áudios</a>.</p>
+        <div class="tip"><b>Dica:</b> fale perto do celular e diga os números devagar (“vaca sete”, “brinco cento e cinquenta e dois”).</div>
+      </section>
+
+      <section id="correcoes">
+        <p class="eyebrow">Telegram</p>
+        <h2>Correções</h2>
+        <p>Corrigir é mudar algo que já está no cadastro: dados de um animal, uma contagem de estoque, o descarte.</p>
+        <ul>
+          <li><b>Funcionário</b> corrige só o que ele mesmo lançou, um cadastro por mensagem.</li>
+          <li><b>Gestor</b> corrige o que qualquer pessoa lançou, e pode corrigir vários de uma vez.</li>
+        </ul>
+        <p>Quando a correção não é permitida, o bot explica, por exemplo: <em>“Só o gestor pode alterar o cadastro do animal 50, porque ele foi lançado por outra pessoa.”</em> A tentativa fica no histórico do animal.</p>
+      </section>
+
+      <section id="comandos">
+        <p class="eyebrow">Telegram</p>
+        <h2>Comandos do gestor</h2>
+        <p>Resumos na hora, só para quem tem a função Gestor.</p>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Comando</th><th>O que mostra</th></tr></thead>
+          <tbody>
+            <tr><td><code>/rebanho</code></td><td>Animais vivos por categoria, nascimentos na semana e no mês, crias por faixa de idade, descarte por motivo, mortes no mês e no ano.</td></tr>
+            <tr><td><code>/maquinas</code></td><td>Quantas estão operando, as paradas com tempo e motivo, tempo médio parada em 90 dias.</td></tr>
+            <tr><td><code>/insumos</code></td><td>Itens em falta ou abaixo do mínimo e faltas que se repetem.</td></tr>
+            <tr><td><code>/lavoura</code></td><td>Lotes de plantação abertos, lançamentos dos últimos 7 dias, colheitas, pragas e colheitas previstas.</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section id="avisos">
+        <p class="eyebrow">Telegram</p>
+        <h2>Alertas e relatórios</h2>
+        <ul>
+          <li><b>Alerta crítico na hora:</b> máquina parada, animal ferido, doente ou morto, combustível acabou. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
+          <li><b>Relatório do dia</b> às 18h e <b>relatório da semana</b> na segunda às 7h, escritos pela IA. O semanal traz também os números do rebanho, das máquinas, dos insumos e da lavoura.</li>
+          <li><b>🌾 Colheita chegando:</b> às 7h, aviso dos lotes de plantação com colheita prevista nos próximos 7 dias.</li>
+        </ul>
+        <p>Alertas e relatórios só chegam para gestores ativos que já mandaram pelo menos uma mensagem ao bot.</p>
+      </section>
+
+      <section id="painel">
+        <p class="eyebrow">Painel</p>
+        <h2>Painel</h2>
+        <p class="lead">A visão geral da fazenda, montada a partir dos recados do Telegram.</p>
+        <ul>
+          <li>Escolha o período no alto: <b class="ui">14 dias</b> ou <b class="ui">30 dias</b>.</li>
+          <li>Os números do topo levam à tela certa: <b class="ui">Registros hoje</b>, <b class="ui">Críticos abertos</b>, <b class="ui">Máquinas paradas</b>, <b class="ui">Áudios pendentes</b>.</li>
+          <li>Gráficos de <b class="ui">Registros por dia</b> e <b class="ui">Por categoria</b>.</li>
+          <li><b class="ui">Itens com mais ocorrências</b>: as máquinas, os animais e os insumos mais citados.</li>
+          <li>Os alertas abertos e o último relatório, com o link <b class="ui">Ver todos</b>.</li>
+        </ul>
+        <p>No menu, um número ao lado de Maquinário, Insumos, Alertas e Áudios avisa que há algo pedindo atenção.</p>
+      </section>
+
+      <section id="registros">
+        <p class="eyebrow">Painel</p>
+        <h2>Registros</h2>
+        <p class="lead">Tudo o que a equipe lançou pelo Telegram, já classificado.</p>
+        <ul>
+          <li>Filtre por categoria e por gravidade (Crítico, Atenção, Info) ou busque um item, como “trator 3” ou “vaca 50”.</li>
+          <li>Cada linha mostra quando, a categoria, a gravidade, o item, o resumo e quem mandou.</li>
+          <li>Nos áudios, aparece o texto transcrito e dá para ouvir a gravação.</li>
+        </ul>
+      </section>
+
+      <section id="rebanho">
+        <p class="eyebrow">Painel</p>
+        <h2>Rebanho</h2>
+        <p class="lead">O cadastro dos animais e os números do rebanho, atualizados a cada recado.</p>
+        <ul>
+          <li><b>No alto:</b> nascimentos na semana e no mês, mortes no mês e no ano, animais vivos.</li>
+          <li><b>Quadros por categoria</b> (touro, matriz, novilha, bezerro, bezerra, sem categoria, descarte): clique para filtrar a lista.</li>
+          <li><b>Gráficos</b> de crias por faixa de idade e de nascimentos e mortes por mês.</li>
+          <li><b>Matrizes sem cria nos últimos 12 meses:</b> fêmeas com mais de 2 anos que não pariram no último ano.</li>
+          <li><b>Cadastrar animal:</b> brinco ou nome, categoria, sexo, mãe e nascimento (marque <b class="ui">Data aproximada</b> se não souber o dia).</li>
+          <li><b>Lista:</b> filtre por situação (vivos, mortos, vendidos), categoria e descarte, ou busque pelo brinco.</li>
+        </ul>
+        <h3>Editar um animal</h3>
+        <ul>
+          <li>Clique em <b class="ui">Editar</b> para mudar brinco, sexo, categoria, mãe, nascimento e situação (vivo, morto ou vendido, com a data).</li>
+          <li>Marque <b class="ui">Descarte</b> para escolher o motivo e a data.</li>
+          <li><b class="ui">Juntar duplicado</b>: quando o mesmo animal foi cadastrado duas vezes, escolha o repetido e clique em <b class="ui">Juntar</b>. Os dados que faltam e as crias passam para este animal, e o repetido é apagado.</li>
+          <li><b class="ui">Histórico de alterações</b> mostra quem mudou o quê, inclusive tentativas recusadas.</li>
+        </ul>
+        <div class="tip"><b>Automático:</b> bezerra vira novilha sozinha aos 12 meses e quem dá cria vira matriz. Se você escolher touro, matriz ou novilha na mão, a categoria fica fixa.</div>
+      </section>
+
+      <section id="engorda">
+        <p class="eyebrow">Painel</p>
+        <h2>Engorda</h2>
+        <p class="lead">Lotes de animais em engorda, do peso de entrada até a venda.</p>
+        <h3>Criar um lote</h3>
+        <p>Em <b class="ui">Novo lote</b>, dê um nome, a data de início e o <b class="ui">Peso de venda por animal (kg)</b>. Marque os animais do lote: só aparecem animais vivos que não estão em outro lote aberto.</p>
+        <h3>No lote</h3>
+        <ul>
+          <li><b>Números:</b> peso total (com arrobas de carcaça estimadas), peso médio, ganho médio diário e quanto falta para o peso de venda, com a previsão em dias.</li>
+          <li><b>Gráfico</b> da evolução do peso médio, com a linha do peso de venda.</li>
+          <li><b>Animais:</b> entrada, peso atual, ganho e ganho diário de cada um. Clique na linha para ver as pesagens e os manejos do animal.</li>
+        </ul>
+        <h3>Lançar pesagem</h3>
+        <p>Escolha <b class="ui">Por animal</b> (um peso para cada) ou <b class="ui">Lote inteiro</b> (peso total e cabeças pesadas). Uma pesagem na mesma data corrige a anterior.</p>
+        <h3>Lançar manejo</h3>
+        <p>Ração, vacina, medicamento ou outro manejo para todos os animais vivos do lote. Escolha o produto do estoque para dar baixa em Insumos. A quantidade é dividida por animal; vacina ou remédio sem quantidade conta um por animal. Excluir o manejo devolve ao estoque.</p>
+        <h3>Venda</h3>
+        <p><b class="ui">Registrar venda</b> pede data, comprador, valor, peso e cabeças. O lote mostra o valor por cabeça, por kg e por arroba, e o resultado (venda menos os custos lançados). Os animais passam para vendido; <b class="ui">Reabrir lote</b> desfaz a venda. Use <b class="ui">Encerrar sem venda</b> quando o lote acaba de outro jeito.</p>
+      </section>
+
+      <section id="plantacoes">
+        <p class="eyebrow">Painel</p>
+        <h2>Plantações</h2>
+        <p class="lead">Lotes de cada cultura por talhão, pomar ou estufa, com insumos, custos, colheita e resultado.</p>
+        <h3>Áreas</h3>
+        <p>Na aba <b class="ui">Áreas</b>, cadastre talhões, pomares e estufas com o tamanho (hectares, ou m² na estufa) e, se quiser, o número de plantas. O bot também cria a área no primeiro plantio.</p>
+        <h3>Lotes</h3>
+        <ul>
+          <li>Um lote é uma cultura numa área: soja no talhão 3 na safra 26/27, uma estufa de tomate num ciclo, o pomar de laranja por vários anos.</li>
+          <li><b class="ui">Novo lote</b> pede cultura, variedade, área, data de plantio, colheita prevista e meta de produtividade.</li>
+          <li>O cartão do lote mostra custo por hectare, produtividade e quanto da meta já foi colhido.</li>
+        </ul>
+        <h3>Dentro do lote</h3>
+        <ul>
+          <li><b class="ui">Lançamento</b>: plantio, adubação, defensivo, combustível, preparo do solo, irrigação, poda, tutoramento, praga ou doença. Com produto do estoque, dá baixa em Insumos; com máquina e horas, entra o custo da máquina.</li>
+          <li><b class="ui">Colheita</b>: colheitas parciais somam no total do lote.</li>
+          <li><b class="ui">+ Venda</b>: o lote pode ter várias vendas. O resultado é vendas menos custos.</li>
+          <li>Cartões de <b class="ui">Custos</b> por tipo, <b class="ui">Por safra</b> (julho a junho), <b class="ui">Insumos usados</b> com dose por hectare e <b class="ui">Máquinas</b> com horas e custo.</li>
+          <li><b class="ui">Marcar como colhido</b> e <b class="ui">Encerrar lote</b> tiram o lote da lista do bot.</li>
+        </ul>
+      </section>
+
+      <section id="maquinario">
+        <p class="eyebrow">Painel</p>
+        <h2>Maquinário</h2>
+        <p class="lead">Tratores, caminhões, colheitadeiras e implementos, com a situação de cada um.</p>
+        <ul>
+          <li>No alto: total de máquinas, paradas, em manutenção e tempo médio parada nos últimos 90 dias.</li>
+          <li><b class="ui">Paradas agora</b> e <b class="ui">Mais ocorrências</b> mostram onde está o problema.</li>
+          <li><b class="ui">Cadastrar máquina</b>: identificação, tipo, marca, modelo, ano, horímetro ou km e <b class="ui">Custo por hora (R$)</b>.</li>
+          <li>Clique numa máquina para editar, <b class="ui">Mudar situação</b> (operando, parada, em manutenção) com o motivo, e ver as ocorrências e alterações.</li>
+        </ul>
+        <p>Quando alguém avisa no Telegram que a máquina quebrou ou voltou, a situação muda sozinha.</p>
+      </section>
+
+      <section id="insumos">
+        <p class="eyebrow">Painel</p>
+        <h2>Insumos</h2>
+        <p class="lead">O estoque da fazenda: diesel, sal, ração, vacinas, sementes, adubos e defensivos.</p>
+        <ul>
+          <li>No alto: insumos cadastrados, em falta, abaixo do mínimo, faltas recorrentes e valor em estoque.</li>
+          <li><b class="ui">Cadastrar insumo</b>: nome, unidade, estoque atual, estoque mínimo e local.</li>
+          <li>Clique num insumo para <b class="ui">Ajustar estoque</b>:
+            <ul>
+              <li><b class="ui">Contagem</b> define o estoque com o que você contou;</li>
+              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio);</li>
+              <li><b class="ui">Consumo</b> subtrai;</li>
+              <li><b class="ui">Acabou</b> zera.</li>
+            </ul>
+          </li>
+          <li>As <b class="ui">Movimentações</b> mostram cada entrada e saída, inclusive as baixas automáticas dos manejos da engorda e dos lançamentos das plantações.</li>
+        </ul>
+        <div class="tip"><b>Estoque mínimo:</b> com ele preenchido, o insumo aparece como “Abaixo do mínimo” e entra nos alertas e no resumo <code>/insumos</code>.</div>
+      </section>
+
+      <section id="alertas">
+        <p class="eyebrow">Painel</p>
+        <h2>Alertas</h2>
+        <p>Ocorrências críticas e de atenção que pedem uma ação. Veja as abas <b class="ui">Abertos</b>, <b class="ui">Resolvidos</b> e <b class="ui">Todos</b>. Depois de cuidar do problema, clique em <b class="ui">Marcar como resolvido</b>; o painel calcula o tempo médio de resolução.</p>
+        <p>Em <a href="#categorias">Categorias</a> você escolhe quais tipos de recado geram alerta crítico.</p>
+      </section>
+
+      <section id="audios">
+        <p class="eyebrow">Painel</p>
+        <h2>Áudios</h2>
+        <p>Os áudios que não deu para transcrever ficam aqui. Ouça, escolha a categoria, o tipo de evento, o item e a gravidade, escreva o resumo do que foi dito e clique em <b class="ui">Registrar</b>. Use <b class="ui">Descartar</b> para áudios sem conteúdo.</p>
+      </section>
+
+      <section id="relatorios">
+        <p class="eyebrow">Painel</p>
+        <h2>Relatórios</h2>
+        <p>Todos os relatórios diários (18h) e semanais (segunda, 7h) escritos pela IA ficam guardados aqui. Clique em um da lista para ler. São os mesmos que os gestores recebem no Telegram.</p>
+      </section>
+
+      <section id="equipe">
+        <p class="eyebrow">Painel</p>
+        <h2>Equipe</h2>
+        <p>Quem pode usar o bot. Para liberar alguém, veja <a href="#comecar">Primeiro acesso</a>.</p>
+        <ul>
+          <li><b class="ui">Editar</b> muda nome, ID do Telegram, função e se a pessoa está ativa.</li>
+          <li>Desative quem saiu da fazenda: o bot para de aceitar as mensagens dessa pessoa, e o histórico fica.</li>
+          <li>Se trocar o ID do Telegram, a pessoa precisa mandar uma mensagem ao bot para voltar a receber alertas e relatórios.</li>
+        </ul>
+      </section>
+
+      <section id="categorias">
+        <p class="eyebrow">Painel</p>
+        <h2>Categorias</h2>
+        <p class="lead">As listas que o bot e o painel usam. Ajuste ao jeito da sua fazenda.</p>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Aba</th><th>Para que serve</th></tr></thead>
+          <tbody>
+            <tr><td>Registros do Telegram</td><td>Categorias (Máquinas, Criações, Insumos, Lavoura, Outros, ou as suas, como Cerca ou Água) e seus tipos de evento. Marque <b class="ui">Gera alerta crítico</b> e, nas máquinas, se o evento deixa a máquina parada, em manutenção ou operando.</td></tr>
+            <tr><td>Categorias de animal</td><td>Touro, matriz, novilha, bezerro, bezerra, com sexo e plural.</td></tr>
+            <tr><td>Tipos de máquina</td><td>Trator, caminhão, implemento… com palavras que ajudam o bot a reconhecer.</td></tr>
+            <tr><td>Motivos de descarte</td><td>Vazia, idade, mastite e outros.</td></tr>
+            <tr><td>Unidades de insumo</td><td>Litro, kg, saco, unidade, com os sinônimos que a equipe fala.</td></tr>
+            <tr><td>Culturas</td><td>Soja, milho, café, laranja, tomate… com o ciclo e a unidade de colheita (sacas, toneladas, caixas, kg).</td></tr>
+            <tr><td>Lançamentos de plantação</td><td>Os tipos de lançamento, com exemplos que ajudam o bot.</td></tr>
+          </tbody>
+        </table></div>
+        <p>Itens marcados como <b class="ui">sistema</b> podem ser renomeados, mas não excluídos. Item em uso pode ser desativado em vez de excluído.</p>
+      </section>
+
+      <section id="custos">
+        <p class="eyebrow">Mais</p>
+        <h2>Como os custos são calculados</h2>
+        <ul>
+          <li><b>Insumos:</b> cada entrada com valor da compra forma o <b>custo médio</b> do insumo.</li>
+          <li><b>Máquinas:</b> o <b>custo por hora</b> (ou por km) fica no cadastro da máquina.</li>
+          <li><b>Lançamento sem custo digitado:</b> o sistema calcula quantidade × custo médio do insumo + horas × custo por hora da máquina, e marca como <b class="ui">automático</b>.</li>
+          <li><b>Custo digitado</b> no lançamento sempre substitui o automático.</li>
+        </ul>
+        <div class="tip warn"><b>Atenção:</b> se o insumo não tem custo médio ou a máquina não tem custo por hora, o lançamento fica sem custo e o lote avisa. Informe o valor nas entradas de Insumos e o custo por hora no Maquinário.</div>
+      </section>
+
+      <section id="duvidas">
+        <p class="eyebrow">Mais</p>
+        <h2>Dúvidas frequentes</h2>
+        <h3>O bot entendeu errado. E agora?</h3>
+        <p>Mande a correção em seguida (“não, era a vaca 17”). O gestor também pode corrigir pelo painel: animal em Rebanho, estoque em Insumos, máquina em Maquinário, manejo excluindo e lançando de novo na Engorda ou nas Plantações.</p>
+        <h3>A pessoa manda mensagem e o bot diz que não está cadastrada.</h3>
+        <p>Copie o ID que o bot mostrou para a tela Equipe. Se ela já está lá, confira se está marcada como ativa e se o ID é o mesmo.</p>
+        <h3>Não recebo alertas nem relatórios.</h3>
+        <p>Confira em Equipe se sua função é Gestor e se está ativo, e mande uma mensagem qualquer ao bot para ele guardar sua conversa.</p>
+        <h3>O estoque não bateu.</h3>
+        <p>Abra o insumo e veja as Movimentações: cada entrada, consumo e baixa automática aparece com a data e a origem. Para acertar, lance uma Contagem com o valor real.</p>
+        <h3>Posso mandar foto?</h3>
+        <p>Pode. Escreva na legenda o que aconteceu; a foto fica junto do registro.</p>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <span>IA AgroAssessor · Guia de uso</span>
+    <span>Dúvidas? WhatsApp: <a href="https://wa.me/5514997281751">(14) 99728-1751</a></span>
+  </footer>
+</div>
+</body>
+</html>
