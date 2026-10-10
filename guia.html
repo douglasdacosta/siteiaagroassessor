@@ -143,9 +143,11 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <a href="#painel">Painel</a>
       <a href="#registros">Registros</a>
       <a href="#rebanho">Rebanho</a>
+      <a href="#sanidade">Sanidade</a>
       <a href="#engorda">Engorda</a>
       <a href="#plantacoes">Plantações</a>
       <a href="#maquinario">Maquinário</a>
+      <a href="#infraestrutura">Infraestrutura</a>
       <a href="#insumos">Insumos</a>
       <a href="#alertas">Alertas</a>
       <a href="#audios">Áudios</a>
@@ -163,8 +165,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <div class="cols">
           <a href="#comecar">Primeiro acesso</a><a href="#bot">Mandando recados</a><a href="#exemplos">Exemplos</a><a href="#respostas">Respostas</a>
           <a href="#audio">Áudios no bot</a><a href="#correcoes">Correções</a><a href="#comandos">Comandos</a><a href="#avisos">Alertas e relatórios</a>
-          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#engorda">Engorda</a>
-          <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#insumos">Insumos</a><a href="#alertas">Alertas</a>
+          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
+          <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#infraestrutura">Infraestrutura</a><a href="#insumos">Insumos</a><a href="#alertas">Alertas</a>
           <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a>
           <a href="#custos">Custos</a><a href="#duvidas">Dúvidas</a>
         </div>
@@ -181,7 +183,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>No painel, em <b class="ui">Equipe</b>, o gestor preenche <b class="ui">Nome</b>, cola o <b class="ui">ID do Telegram</b>, escolhe a <b class="ui">Função</b> e clica em <b class="ui">Adicionar</b>.</li>
           <li>A pessoa manda <code>/start</code> no bot e recebe: <em>“Olá, Nome! Pode mandar suas anotações por texto, foto ou áudio.”</em> Pronto.</li>
         </ol>
-        <div class="tip"><b>Funcionário ou gestor?</b> Funcionário manda recados. Gestor também manda, e além disso recebe os alertas críticos e os relatórios no Telegram, usa os comandos de resumo e pode corrigir o que qualquer pessoa lançou.</div>
+        <div class="tip"><b>Funcionário, gerente ou gestor?</b> Funcionário manda recados (pelo Telegram ou pelo app) e não vê valores em R$ nem relatórios. Gerente e gestor também mandam, recebem os alertas críticos e os relatórios no Telegram, usam os comandos de resumo, corrigem o que qualquer pessoa lançou e podem ter acesso ao painel. Só o gestor libera e tira o acesso ao painel.</div>
       </section>
 
       <section id="bot">
@@ -207,9 +209,13 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <div><small>Morte</small>A vaca 50 morreu, picada de cobra.</div>
           <div><small>Descarte</small>Vaca 154 pro descarte, está vazia. / Tira a 154 do descarte.</div>
           <div><small>Pesagem de um animal</small>Pesei a novilha 24 com 320 kg e a vaca 10 com 410.</div>
+          <div><small>Mudança de pasto</small>Passei 30 vacas do pasto 2 pro pasto 5. / Leva a 12 e a 15 pro piquete 3.</div>
+          <div><small>Compra</small>Comprei 20 bezerros nelore, 180 kg cada, R$ 2.500 a cabeça. Foram pro pasto 4.</div>
+          <div><small>Venda avulsa</small>Vendi a vaca 154 pro frigorífico, 520 kg, R$ 4.800.</div>
+          <div><small>Vacina e remédio</small>Vacinei o pasto 5 contra aftosa, 2 mL por cabeça. / Dei ivermectina no rebanho todo. / Tratei a vaca 30 com pencivet, 20 mL, carência 30 dias.</div>
           <div><small>Correção de cadastro</small>A vaca 75 nasceu em 24/03/2023.</div>
         </div>
-        <p>Se a vaca já tem cria recente, uma mensagem sobre o bezerro dela atualiza essa cria em vez de cadastrar outro nascimento.</p>
+        <p>Se a vaca já tem cria recente, uma mensagem sobre o bezerro dela atualiza essa cria em vez de cadastrar outro nascimento. Pasto que ainda não existe é cadastrado na primeira vez que aparece. Vacina e remédio saem do estoque de Insumos; se o animal estiver em carência, o bot avisa na venda.</p>
 
         <h3>Engorda</h3>
         <div class="say">
@@ -224,6 +230,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <div><small>Plantio</small>Plantei soja no talhão 3, 40 sacos de semente.</div>
           <div><small>Aplicação ou serviço</small>Passei 200 kg de ureia no milho do talhão 2, trator 3, 4 horas.</div>
           <div><small>Colheita</small>Colhi 1.200 sacas de soja no talhão 3.</div>
+          <div><small>Perda</small>Perdi 50 sacas de soja no talhão 3 com a chuva. / O granizo levou 10% do milho.</div>
           <div><small>Praga</small>Apareceu lagarta na soja do talhão 4.</div>
         </div>
         <p>No primeiro plantio, a área e o lote são criados sozinhos. A semente, o adubo e o defensivo saem do estoque. A resposta mostra a dose por hectare, o custo e o saldo do estoque.</p>
@@ -233,7 +240,18 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <div><small>Quebra</small>Trator 3 parou no talhão 5, pneu furado.</div>
           <div><small>Volta a operar</small>O trator 3 voltou, já trocaram o pneu.</div>
           <div><small>Uso e horímetro</small>Trator 3 está com 4.520 horas.</div>
+          <div><small>Abastecimento</small>Abasteci o trator 3 com 120 litros, horímetro 4.535.</div>
+          <div><small>Revisão ou conserto feito</small>Fiz a revisão de 250 horas do trator 3, troquei filtro de óleo e filtro de ar, R$ 1.800.</div>
         </div>
+        <p>O abastecimento tira o diesel do estoque e calcula o consumo por hora (ou por km). A revisão preventiva reinicia a contagem até a próxima.</p>
+
+        <h3>Infraestrutura</h3>
+        <div class="say">
+          <div><small>Problema</small>A cerca do pasto 5 caiu, uns 3 lances. / A bomba do poço 2 queimou.</div>
+          <div><small>Conserto feito</small>Troquei a boia do bebedouro do curral, R$ 120.</div>
+          <div><small>Em conserto</small>O motor da bomba foi pro rebobinador.</div>
+        </div>
+        <p>Cercas, currais, bebedouros, poços, bombas, estradas, represas e construções são cadastrados na primeira vez que aparecem.</p>
 
         <h3>Insumos</h3>
         <div class="say">
@@ -241,6 +259,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <div><small>Consumo</small>Usei 2 sacos de sal no cocho.</div>
           <div><small>Contagem</small>Tem 300 litros de diesel no tanque.</div>
           <div><small>Faltou</small>Acabou o diesel.</div>
+          <div><small>Entrada com lote e validade</small>Chegaram 50 doses de vacina aftosa, lote AB123, validade 10/11/2026.</div>
+          <div><small>Consumo com destino</small>Usei 20 litros de diesel no gerador da sede.</div>
         </div>
         <p>Máquinas e insumos que ainda não existem no cadastro são criados na primeira vez que aparecem.</p>
       </section>
@@ -295,9 +315,12 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="eyebrow">Telegram</p>
         <h2>Alertas e relatórios</h2>
         <ul>
-          <li><b>Alerta crítico na hora:</b> máquina parada, animal ferido, doente ou morto, combustível acabou. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
+          <li><b>Alerta crítico na hora:</b> máquina parada, animal ferido, doente ou morto, combustível acabou, problema em cerca, bomba, bebedouro ou outra instalação. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
           <li><b>Relatório do dia</b> às 18h e <b>relatório da semana</b> na segunda às 7h, escritos pela IA. O semanal traz também os números do rebanho, das máquinas, dos insumos e da lavoura.</li>
           <li><b>🌾 Colheita chegando:</b> às 7h, aviso dos lotes de plantação com colheita prevista nos próximos 7 dias.</li>
+          <li><b>Revisão chegando:</b> às 7h05, aviso das máquinas que faltam menos de 10% do intervalo para a revisão preventiva, ou que já passaram.</li>
+          <li><b>📦 Insumos vencendo:</b> às 7h10, aviso dos lotes de insumo que vencem nos próximos 30 dias. Cada lote é avisado uma vez.</li>
+          <li><b>Conferir valor:</b> quando um funcionário diz um valor em R$, ele fica gravado e vira um alerta para o gestor conferir. O funcionário não vê valores nas respostas.</li>
         </ul>
         <p>Alertas e relatórios só chegam para gestores ativos que já mandaram pelo menos uma mensagem ao bot.</p>
       </section>
@@ -313,7 +336,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li><b class="ui">Itens com mais ocorrências</b>: as máquinas, os animais e os insumos mais citados.</li>
           <li>Os alertas abertos e o último relatório, com o link <b class="ui">Ver todos</b>.</li>
         </ul>
-        <p>No menu, um número ao lado de Maquinário, Insumos, Alertas e Áudios avisa que há algo pedindo atenção.</p>
+        <p>No menu, um número ao lado de Maquinário, Infraestrutura, Insumos, Alertas e Áudios avisa que há algo pedindo atenção.</p>
       </section>
 
       <section id="registros">
@@ -336,17 +359,34 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li><b>Quadros por categoria</b> (touro, matriz, novilha, bezerro, bezerra, sem categoria, descarte): clique para filtrar a lista.</li>
           <li><b>Gráficos</b> de crias por faixa de idade e de nascimentos e mortes por mês.</li>
           <li><b>Matrizes sem cria nos últimos 12 meses:</b> fêmeas com mais de 2 anos que não pariram no último ano.</li>
+          <li><b>Pastos:</b> quantos animais há em cada pasto. Clique num pasto para filtrar a lista; cadastre, renomeie ou desative pastos ali mesmo.</li>
           <li><b>Cadastrar animal:</b> brinco ou nome, categoria, sexo, mãe e nascimento (marque <b class="ui">Data aproximada</b> se não souber o dia).</li>
-          <li><b>Lista:</b> filtre por situação (vivos, mortos, vendidos), categoria e descarte, ou busque pelo brinco.</li>
+          <li><b>Lista:</b> filtre por situação (vivos, mortos, vendidos), categoria, descarte e pasto, ou busque pelo brinco. A lista mostra raça, pasto, último peso e a etiqueta de carência.</li>
+          <li><b>Mudar de pasto:</b> marque os animais na lista e use <b class="ui">Mover para o pasto…</b>.</li>
         </ul>
         <h3>Editar um animal</h3>
         <ul>
-          <li>Clique em <b class="ui">Editar</b> para mudar brinco, sexo, categoria, mãe, nascimento e situação (vivo, morto ou vendido, com a data).</li>
+          <li>Clique em <b class="ui">Editar</b> para mudar brinco, sexo, categoria, raça, pasto, mãe, nascimento e situação (vivo, morto ou vendido, com a data).</li>
+          <li><b>Compra e venda:</b> data, de quem comprou ou para quem vendeu, peso e valor. Os valores só aparecem para gestor e gerente.</li>
+          <li><b>Pesagens:</b> lance o peso do animal em qualquer data e veja o histórico com o ganho por dia.</li>
+          <li><b>Sanidade:</b> as vacinas, vermífugos e tratamentos que o animal recebeu, com a carência.</li>
           <li>Marque <b class="ui">Descarte</b> para escolher o motivo e a data.</li>
           <li><b class="ui">Juntar duplicado</b>: quando o mesmo animal foi cadastrado duas vezes, escolha o repetido e clique em <b class="ui">Juntar</b>. Os dados que faltam e as crias passam para este animal, e o repetido é apagado.</li>
           <li><b class="ui">Histórico de alterações</b> mostra quem mudou o quê, inclusive tentativas recusadas.</li>
         </ul>
         <div class="tip"><b>Automático:</b> bezerra vira novilha sozinha aos 12 meses e quem dá cria vira matriz. Se você escolher touro, matriz ou novilha na mão, a categoria fica fixa.</div>
+      </section>
+
+      <section id="sanidade">
+        <p class="eyebrow">Painel</p>
+        <h2>Sanidade</h2>
+        <p class="lead">Vacinas, vermífugos e tratamentos do rebanho, com baixa do produto em Insumos e controle de carência.</p>
+        <ul>
+          <li><b class="ui">Registrar aplicação</b>: tipo (vacina, vermífugo, tratamento ou outro), produto, dose por animal ou quantidade total, e onde foi aplicado: num pasto, numa categoria, em animais escolhidos pelo brinco ou no rebanho todo.</li>
+          <li>O produto sai do estoque. Excluir a aplicação devolve o produto.</li>
+          <li><b class="ui">Não vender nem abater antes</b>: animais em carência e a data em que ela termina. A carência vem da aplicação ou do cadastro do produto em Insumos.</li>
+        </ul>
+        <p>Manejo de um lote de engorda inteiro continua na página <a href="#engorda">Engorda</a>.</p>
       </section>
 
       <section id="engorda">
@@ -385,6 +425,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <ul>
           <li><b class="ui">Lançamento</b>: plantio, adubação, defensivo, combustível, preparo do solo, irrigação, poda, tutoramento, praga ou doença. Com produto do estoque, dá baixa em Insumos; com máquina e horas, entra o custo da máquina.</li>
           <li><b class="ui">Colheita</b>: colheitas parciais somam no total do lote.</li>
+          <li><b class="ui">+ Perda</b>: produção perdida por chuva, granizo, seca, praga ou na colheita, em quantidade ou em % do lote, com o motivo. O cartão Colhido e a tabela Por safra mostram as perdas e quanto elas representam do colhido mais o perdido.</li>
           <li><b class="ui">+ Venda</b>: o lote pode ter várias vendas. O resultado é vendas menos custos.</li>
           <li>Cartões de <b class="ui">Custos</b> por tipo, <b class="ui">Por safra</b> (julho a junho), <b class="ui">Insumos usados</b> com dose por hectare e <b class="ui">Máquinas</b> com horas e custo.</li>
           <li><b class="ui">Marcar como colhido</b> e <b class="ui">Encerrar lote</b> tiram o lote da lista do bot.</li>
@@ -400,8 +441,24 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li><b class="ui">Paradas agora</b> e <b class="ui">Mais ocorrências</b> mostram onde está o problema.</li>
           <li><b class="ui">Cadastrar máquina</b>: identificação, tipo, marca, modelo, ano, horímetro ou km e <b class="ui">Custo por hora (R$)</b>.</li>
           <li>Clique numa máquina para editar, <b class="ui">Mudar situação</b> (operando, parada, em manutenção) com o motivo, e ver as ocorrências e alterações.</li>
+          <li><b>Abastecimentos:</b> litros, horímetro ou km e valor. O diesel sai do estoque e a máquina mostra a média de consumo (L/h ou km/L).</li>
+          <li><b>Manutenções feitas:</b> revisão preventiva ou conserto, com peças, valor, horímetro e oficina.</li>
+          <li><b>Revisão preventiva:</b> informe <b class="ui">A cada</b> (horas ou km) e a última revisão. A lista mostra a próxima revisão, o quanto falta, e o card <b class="ui">Revisão preventiva</b> junta as que estão vencidas ou perto de vencer.</li>
         </ul>
         <p>Quando alguém avisa no Telegram que a máquina quebrou ou voltou, a situação muda sozinha.</p>
+      </section>
+
+      <section id="infraestrutura">
+        <p class="eyebrow">Painel</p>
+        <h2>Infraestrutura</h2>
+        <p class="lead">Cercas, currais, bebedouros, poços, bombas, estradas, represas e construções, no mesmo jeito do Maquinário.</p>
+        <ul>
+          <li>No alto: instalações cadastradas, com problema, em manutenção e o gasto com manutenção no ano.</li>
+          <li><b class="ui">Onde mais se gastou no ano</b>: as instalações que mais custaram.</li>
+          <li><b class="ui">Cadastrar instalação</b>: identificação (ex.: “cerca do pasto 5”), tipo e local. Sem tipo, o sistema escolhe pelo nome.</li>
+          <li>Clique numa instalação para editar, <b class="ui">Mudar situação</b> (funcionando, com problema, em manutenção) e <b class="ui">Lançar ocorrência</b>: problema ou manutenção feita, com material, valor e quem fez.</li>
+        </ul>
+        <p>Quando alguém avisa no Telegram que algo quebrou, a situação vira “com problema” e o gestor recebe o alerta. Quando avisa que consertou, volta para “funcionando”.</p>
       </section>
 
       <section id="insumos">
@@ -410,12 +467,14 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="lead">O estoque da fazenda: diesel, sal, ração, vacinas, sementes, adubos e defensivos.</p>
         <ul>
           <li>No alto: insumos cadastrados, em falta, abaixo do mínimo, faltas recorrentes e valor em estoque.</li>
-          <li><b class="ui">Cadastrar insumo</b>: nome, unidade, estoque atual, estoque mínimo e local.</li>
+          <li><b class="ui">Cadastrar insumo</b>: nome, categoria (ração, sal, semente, adubo, defensivo, remédio, combustível, peça), unidade, estoque atual, estoque mínimo e local. Sem categoria, o sistema escolhe pelo nome. Em remédios, informe a carência em dias.</li>
+          <li><b class="ui">Vencendo</b>: entradas com validade nos próximos 30 dias, de insumos que ainda têm estoque.</li>
+          <li><b class="ui">Consumo por destino</b>: o que saiu do estoque no período, por máquina, plantação, engorda, sanidade ou destino dito no Telegram, com o valor pelo custo médio.</li>
           <li>Clique num insumo para <b class="ui">Ajustar estoque</b>:
             <ul>
               <li><b class="ui">Contagem</b> define o estoque com o que você contou;</li>
-              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio);</li>
-              <li><b class="ui">Consumo</b> subtrai;</li>
+              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio, e o lote e a validade se tiver);</li>
+              <li><b class="ui">Consumo</b> subtrai (informe o destino, como “horta” ou “sede”);</li>
               <li><b class="ui">Acabou</b> zera.</li>
             </ul>
           </li>
@@ -448,7 +507,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <h2>Equipe</h2>
         <p>Quem pode usar o bot. Para liberar alguém, veja <a href="#comecar">Primeiro acesso</a>.</p>
         <ul>
-          <li><b class="ui">Editar</b> muda nome, ID do Telegram, função e se a pessoa está ativa.</li>
+          <li><b class="ui">Editar</b> muda nome, ID do Telegram, função (funcionário, gerente ou gestor) e se a pessoa está ativa.</li>
+          <li><b class="ui">Acesso ao painel</b>: o gestor cria o e-mail e a senha de um gerente ou gestor para entrar no painel, e pode tirar o acesso. Funcionário não entra no painel.</li>
           <li>Desative quem saiu da fazenda: o bot para de aceitar as mensagens dessa pessoa, e o histórico fica.</li>
           <li>Se trocar o ID do Telegram, a pessoa precisa mandar uma mensagem ao bot para voltar a receber alertas e relatórios.</li>
         </ul>
@@ -461,10 +521,12 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <div class="table-scroll"><table>
           <thead><tr><th>Aba</th><th>Para que serve</th></tr></thead>
           <tbody>
-            <tr><td>Registros do Telegram</td><td>Categorias (Máquinas, Criações, Insumos, Lavoura, Outros, ou as suas, como Cerca ou Água) e seus tipos de evento. Marque <b class="ui">Gera alerta crítico</b> e, nas máquinas, se o evento deixa a máquina parada, em manutenção ou operando.</td></tr>
+            <tr><td>Registros do Telegram</td><td>Categorias (Máquinas, Criações, Insumos, Lavoura, Infraestrutura, Outros, ou as suas) e seus tipos de evento. Marque <b class="ui">Gera alerta crítico</b> e, nas máquinas e na infraestrutura, como o evento muda a situação.</td></tr>
             <tr><td>Categorias de animal</td><td>Touro, matriz, novilha, bezerro, bezerra, com sexo e plural.</td></tr>
             <tr><td>Tipos de máquina</td><td>Trator, caminhão, implemento… com palavras que ajudam o bot a reconhecer.</td></tr>
+            <tr><td>Tipos de instalação</td><td>Cerca, curral, bebedouro, poço, bomba, estrada… com palavras que ajudam o bot a reconhecer pelo nome.</td></tr>
             <tr><td>Motivos de descarte</td><td>Vazia, idade, mastite e outros.</td></tr>
+            <tr><td>Categorias de insumo</td><td>Ração, sal, semente, adubo, defensivo, remédio, combustível, peça, com palavras que ajudam a escolher a categoria pelo nome.</td></tr>
             <tr><td>Unidades de insumo</td><td>Litro, kg, saco, unidade, com os sinônimos que a equipe fala.</td></tr>
             <tr><td>Culturas</td><td>Soja, milho, café, laranja, tomate… com o ciclo e a unidade de colheita (sacas, toneladas, caixas, kg).</td></tr>
             <tr><td>Lançamentos de plantação</td><td>Os tipos de lançamento, com exemplos que ajudam o bot.</td></tr>
@@ -489,7 +551,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="eyebrow">Mais</p>
         <h2>Dúvidas frequentes</h2>
         <h3>O bot entendeu errado. E agora?</h3>
-        <p>Mande a correção em seguida (“não, era a vaca 17”). O gestor também pode corrigir pelo painel: animal em Rebanho, estoque em Insumos, máquina em Maquinário, manejo excluindo e lançando de novo na Engorda ou nas Plantações.</p>
+        <p>Mande a correção em seguida (“não, era a vaca 17”). O gestor também pode corrigir pelo painel: animal em Rebanho, estoque em Insumos, máquina em Maquinário, instalação em Infraestrutura, manejo excluindo e lançando de novo na Engorda ou nas Plantações.</p>
         <h3>A pessoa manda mensagem e o bot diz que não está cadastrada.</h3>
         <p>Copie o ID que o bot mostrou para a tela Equipe. Se ela já está lá, confira se está marcada como ativa e se o ID é o mesmo.</p>
         <h3>Não recebo alertas nem relatórios.</h3>
