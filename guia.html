@@ -164,6 +164,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <a href="#relatorios">Relatórios</a>
       <a href="#equipe">Equipe</a>
       <a href="#categorias">Categorias</a>
+      <a href="#configuracoes">Configurações</a>
       <p>Mais</p>
       <a href="#custos">Como os custos são calculados</a>
       <a href="#duvidas">Dúvidas frequentes</a>
@@ -177,7 +178,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <a href="#audio">Áudios no bot</a><a href="#correcoes">Correções</a><a href="#comandos">Comandos</a><a href="#avisos">Alertas e relatórios</a>
           <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
           <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#infraestrutura">Infraestrutura</a><a href="#insumos">Insumos</a><a href="#tarefas">Tarefas</a><a href="#financeiro">Financeiro</a><a href="#compras">Compras e vendas</a><a href="#reproducao">Reprodução</a><a href="#administrativo">Administrativo</a><a href="#indicadores">Indicadores</a><a href="#alertas">Alertas</a>
-          <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a>
+          <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a><a href="#configuracoes">Configurações</a>
           <a href="#custos">Custos</a><a href="#duvidas">Dúvidas</a>
         </div>
       </details>
@@ -337,7 +338,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <section id="comandos">
         <p class="eyebrow">Telegram</p>
         <h2>Comandos do gestor</h2>
-        <p>Resumos na hora, para gestor e gerente.</p>
+        <p>Resumos na hora, para gestor e gerente. Comando de um módulo desligado em <a href="#configuracoes">Configurações</a> responde que o módulo está desativado.</p>
         <div class="table-scroll"><table>
           <thead><tr><th>Comando</th><th>O que mostra</th></tr></thead>
           <tbody>
@@ -664,6 +665,29 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p>Itens marcados como <b class="ui">sistema</b> podem ser renomeados, mas não excluídos. Item em uso pode ser desativado em vez de excluído.</p>
       </section>
 
+      <section id="configuracoes">
+        <p class="eyebrow">Painel</p>
+        <h2>Configurações</h2>
+        <p class="lead">Escolha os módulos que a fazenda usa. Fazenda só de agricultura, por exemplo, desliga o Rebanho e o menu fica só com o que interessa.</p>
+        <ul>
+          <li>Em <b class="ui">Configurações &gt; Módulos</b>, cada módulo tem um botão de ligar e desligar. Todos começam ligados.</li>
+          <li>Só o <b>gestor</b> liga e desliga. O gerente vê como está, sem mudar.</li>
+          <li>Módulo desligado some do menu, dos resumos do bot e do app de campo, dos avisos diários, dos relatórios, do fechamento do mês e dos Indicadores.</li>
+          <li><b>Nada é apagado.</b> Ao religar, tudo volta como estava.</li>
+        </ul>
+        <h3>Módulos que dependem de outros</h3>
+        <ul>
+          <li>Reprodução e nutrição, Sanidade e Engorda dependem do <b>Rebanho</b>: desligar o Rebanho desliga os três; ligar um deles liga o Rebanho junto.</li>
+          <li>Compras e vendas depende de <b>Insumos</b>.</li>
+          <li>Com Insumos desligado, a baixa de estoque das plantações, máquinas e animais continua sendo feita por trás: ao religar, o saldo está certo.</li>
+          <li>Com o Financeiro desligado, as contas automáticas (compras, vendas, consertos) continuam sendo geradas, sem aviso de vencimento.</li>
+        </ul>
+        <h3>Se alguém lançar algo num módulo desligado</h3>
+        <p>O lançamento fica gravado, o gestor e o gerente recebem um alerta “Informação em módulo desativado” e quem mandou recebe o aviso de que o módulo está desativado. Em <b class="ui">Registros</b> ele aparece com o selo <b class="ui">módulo desativado</b>. Se o módulo for religado, o lançamento aparece na tela dele.</p>
+        <p>Painel, Registros, Alertas, Áudios, Relatórios, Equipe e Categorias ficam sempre ligados.</p>
+        <figure class="shot"><img src="img/configuracoes-modulos.jpg" alt="Tela Configurações com os módulos da fazenda e os botões de ligar e desligar" loading="lazy"><figcaption>Configurações &gt; Módulos ao ligar a Sanidade com o Rebanho desligado. Dados de exemplo.</figcaption></figure>
+      </section>
+
       <section id="custos">
         <p class="eyebrow">Mais</p>
         <h2>Como os custos são calculados</h2>
@@ -687,6 +711,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p>Confira em Equipe se sua função é Gestor e se está ativo, e mande uma mensagem qualquer ao bot para ele guardar sua conversa.</p>
         <h3>O estoque não bateu.</h3>
         <p>Abra o insumo e veja as Movimentações: cada entrada, consumo e baixa automática aparece com a data e a origem. Para acertar, lance uma Contagem com o valor real.</p>
+        <h3>Um menu sumiu do painel.</h3>
+        <p>O módulo foi desligado em <a href="#configuracoes">Configurações</a>. O gestor pode religar; os dados continuam lá.</p>
         <h3>Posso mandar foto?</h3>
         <p>Pode. Escreva na legenda o que aconteceu; a foto fica junto do registro.</p>
       </section>
