@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza rebanho, engorda, plantações, máquinas e estoque, avisa o gestor e escreve os relatórios da fazenda.">
+<meta name="description" content="IA AgroAssessor: sua equipe manda texto, foto ou áudio pelo Telegram e a inteligência artificial organiza rebanho, engorda, plantações, máquinas, estoque, tarefas e financeiro, avisa o gestor e escreve os relatórios da fazenda.">
 <meta property="og:title" content="IA AgroAssessor">
 <meta property="og:description" content="Gestão da fazenda pelo Telegram, com inteligência artificial.">
 <meta property="og:locale" content="pt_BR">
@@ -162,6 +162,21 @@ section.band { padding-block: 84px; border-top: 1px solid var(--line); }
 .note { margin-top: 14px; color: var(--muted); font-size: 14px; }
 
 /* Para quem */
+.mods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.mod { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.mod h3 { font-size: 28px; font-weight: 800; text-transform: uppercase; }
+.mod q { display: block; font-family: var(--mono); font-size: 13px; color: var(--muted); quotes: "“" "”"; border-left: 3px solid var(--accent); padding-left: 10px; }
+.mod ul { margin: 0; padding-left: 18px; font-size: 15px; color: var(--muted); }
+.shot { margin: 28px 0 0; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 14px; }
+.shot figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.shots { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.role { border-left: 4px solid var(--accent); padding-left: 20px; min-width: 0; }
+.role h3 { font-size: 30px; font-weight: 800; text-transform: uppercase; }
+.role ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+@media (max-width: 960px) { .mods, .roles { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .mods, .roles, .shots { grid-template-columns: 1fr; } }
 .who { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
 .who > div { min-width: 0; border-left: 4px solid var(--accent); padding-left: 20px; }
 .who h3 { font-size: 30px; font-weight: 800; text-transform: uppercase; }
@@ -204,6 +219,8 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
       <a href="#registra">O que registra</a>
       <a href="#engorda">Engorda</a>
       <a href="#plantacoes">Plantações</a>
+      <a href="#modulos">Mais módulos</a>
+      <a href="#perfis">Perfis</a>
       <a href="#gestor">Para o gestor</a>
       <a href="guia.html">Guia de uso</a>
       <a href="#contato">Contato</a>
@@ -219,7 +236,7 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <a class="btn primary" href="https://wa.me/5514997281751?text=Ol%C3%A1!%20Quero%20conhecer%20o%20IA%20AgroAssessor%20na%20minha%20fazenda." target="_blank" rel="noopener">Quero testar na minha fazenda</a>
         <a class="btn" href="#como">Ver como funciona</a>
       </div>
-      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Engorda, plantações e estoque · Relatório diário e semanal</p>
+      <p class="proof">Sem aplicativo novo para a equipe · Funciona com áudio · Rebanho, lavoura, tarefas e financeiro · Relatórios diário, semanal e mensal</p>
     </div>
 
     <div class="phone" role="img" aria-label="Exemplo de conversa: o funcionário manda um áudio sobre um nascimento e o bot confirma o registro">
@@ -431,6 +448,71 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
   </div>
 </section>
 
+<section class="band" id="modulos">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Mais módulos</p>
+        <h2>Da tarefa do dia ao fechamento do mês</h2>
+      </div>
+      <p>Além do campo, o sistema agora cuida da equipe, do dinheiro, das compras, da reprodução e da papelada da fazenda. Tudo alimentado pelos mesmos recados que a equipe já manda.</p>
+    </div>
+    <div class="mods">
+      <article class="mod">
+        <h3>Tarefas</h3>
+        <q>Terminei a cerca do pasto 3</q>
+        <ul><li>Gestor e gerente criam tarefas com responsável, prazo e local</li><li>O funcionário recebe no app ou no Telegram e conclui por mensagem</li><li>Calendário, lista de pendências e alerta de tarefa atrasada</li><li>Função de cada pessoa na equipe</li></ul>
+      </article>
+      <article class="mod">
+        <h3>Financeiro</h3>
+        <q>Paguei 2.300 de energia</q>
+        <ul><li>Contas a pagar e a receber, com aviso de vencimento</li><li>Despesas e receitas lançadas sozinhas a partir de estoque, vendas e consertos</li><li>Folha, despesas recorrentes, empréstimos e financiamentos</li><li>Fluxo de caixa, custo por hectare e por animal, resultado e margem</li></ul>
+      </article>
+      <article class="mod">
+        <h3>Compras e vendas</h3>
+        <q>Chegaram os 100 sacos do pedido</q>
+        <ul><li>Fornecedores e compradores, pedidos e recebimento no estoque</li><li>Cotações e histórico de preços por produto</li><li>Contratos de venda com pesagem, frete e entrega</li><li>Foto da nota ou do comprovante ligada à compra ou à venda</li></ul>
+      </article>
+      <article class="mod">
+        <h3>Reprodução e nutrição</h3>
+        <q>Cobri a vaca 12 com o touro 3</q>
+        <ul><li>Estação de monta, cobertura, inseminação e diagnóstico de prenhez</li><li>Previsão de parto, matrizes vazias e taxa de prenhez</li><li>Suplementação por pasto, com baixa no estoque</li><li>Calendário sanitário com aviso de vacina e vermifugação</li></ul>
+      </article>
+      <article class="mod">
+        <h3>Administrativo</h3>
+        <q>Renovei o seguro do trator</q>
+        <ul><li>Mais de uma propriedade por cliente, com arrendamentos</li><li>Documentos com arquivo e vencimento: CAR, CCIR, ITR, licenças, GTA, seguros</li><li>Agenda de compromissos com aviso antes do vencimento</li><li>Histórico de decisões do gestor</li></ul>
+      </article>
+      <article class="mod">
+        <h3>Indicadores</h3>
+        <q>Fechamento do mês chega no dia 1</q>
+        <ul><li>Quadros por período: pecuária, agricultura, estoque, máquinas, tarefas e finanças</li><li>Metas e orçamento anual, com meta x realizado</li><li>Planejamento de safra e de rebanho</li><li>Fechamento do mês e conferência da semana, no Telegram</li></ul>
+      </article>
+    </div>
+    <div class="shots">
+      <figure class="shot"><img src="img/tarefas-lista.jpg" alt="Tela de Tarefas com a lista de pendências da equipe" loading="lazy"><figcaption>Tarefas: pendências, prazos e responsáveis. Dados de exemplo.</figcaption></figure>
+      <figure class="shot"><img src="img/financeiro-fluxo.jpg" alt="Tela de Financeiro com o fluxo de caixa" loading="lazy"><figcaption>Financeiro: fluxo de caixa realizado e previsto. Dados de exemplo.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="perfis">
+  <div class="wrap">
+    <div class="band-head">
+      <div>
+        <p class="eyebrow">Perfis</p>
+        <h2>Cada um vê o que precisa</h2>
+      </div>
+      <p>Os valores em R$ e os relatórios ficam com quem decide. A equipe só manda o que aconteceu.</p>
+    </div>
+    <div class="roles">
+      <div class="role"><h3>Gestor</h3><ul><li>Lança e vê tudo, inclusive valores</li><li>Recebe alertas e relatórios no Telegram</li><li>Corrige registros de qualquer pessoa</li><li>Libera e bloqueia o acesso ao painel</li></ul></div>
+      <div class="role"><h3>Gerente</h3><ul><li>Lança e vê tudo, inclusive valores</li><li>Recebe alertas e relatórios no Telegram</li><li>Cria tarefas e acompanha a equipe</li><li>Entra no painel com o acesso liberado pelo gestor</li></ul></div>
+      <div class="role"><h3>Funcionário</h3><ul><li>Manda movimentações por Telegram ou app</li><li>Recebe e conclui as próprias tarefas</li><li>Não vê valores nem relatórios</li><li>Se disser um valor, o gestor é avisado para conferir</li></ul></div>
+    </div>
+  </div>
+</section>
+
 <section class="band" id="gestor">
   <div class="wrap">
     <div class="band-head">
@@ -513,11 +595,11 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
         <h3>Para o dono e o gestor</h3>
         <ul>
           <li>Painel web com gráficos e histórico</li>
-          <li>Rebanho, engorda, plantações, máquinas e estoque num lugar só</li>
+          <li>Rebanho, engorda, plantações, máquinas, estoque, tarefas, financeiro e documentos num lugar só</li>
           <li>Ficha de cada animal, máquina e insumo</li>
           <li>Áudio que a IA não entendeu fica para você ouvir</li>
-          <li>Só o gestor altera dados de todos</li>
-          <li>Relatórios diário e semanal escritos pela IA</li>
+          <li>Gestor e gerente corrigem os dados de todos</li>
+          <li>Relatórios diário e semanal escritos pela IA, e fechamento do mês</li>
         </ul>
       </div>
     </div>

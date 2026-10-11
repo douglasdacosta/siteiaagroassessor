@@ -102,6 +102,10 @@ th { font-family: var(--mono); font-size: 12px; text-transform: uppercase; lette
 .steps li { counter-increment: s; position: relative; padding-left: 44px; }
 .steps li::before { content: counter(s); position: absolute; left: 0; top: -2px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--accent-ink); font-weight: 700; display: grid; place-items: center; font-size: 15px; }
 
+.shot { margin: 18px 0 0; max-width: 70ch; }
+.shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 12px; }
+.shot figcaption { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
+
 footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); }
 </style>
 </head>
@@ -149,6 +153,12 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <a href="#maquinario">Maquinário</a>
       <a href="#infraestrutura">Infraestrutura</a>
       <a href="#insumos">Insumos</a>
+      <a href="#tarefas">Tarefas</a>
+      <a href="#financeiro">Financeiro</a>
+      <a href="#compras">Compras e vendas</a>
+      <a href="#reproducao">Reprodução e nutrição</a>
+      <a href="#administrativo">Administrativo</a>
+      <a href="#indicadores">Indicadores</a>
       <a href="#alertas">Alertas</a>
       <a href="#audios">Áudios</a>
       <a href="#relatorios">Relatórios</a>
@@ -166,7 +176,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <a href="#comecar">Primeiro acesso</a><a href="#bot">Mandando recados</a><a href="#exemplos">Exemplos</a><a href="#respostas">Respostas</a>
           <a href="#audio">Áudios no bot</a><a href="#correcoes">Correções</a><a href="#comandos">Comandos</a><a href="#avisos">Alertas e relatórios</a>
           <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
-          <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#infraestrutura">Infraestrutura</a><a href="#insumos">Insumos</a><a href="#alertas">Alertas</a>
+          <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#infraestrutura">Infraestrutura</a><a href="#insumos">Insumos</a><a href="#tarefas">Tarefas</a><a href="#financeiro">Financeiro</a><a href="#compras">Compras e vendas</a><a href="#reproducao">Reprodução</a><a href="#administrativo">Administrativo</a><a href="#indicadores">Indicadores</a><a href="#alertas">Alertas</a>
           <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a>
           <a href="#custos">Custos</a><a href="#duvidas">Dúvidas</a>
         </div>
@@ -183,7 +193,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>No painel, em <b class="ui">Equipe</b>, o gestor preenche <b class="ui">Nome</b>, cola o <b class="ui">ID do Telegram</b>, escolhe a <b class="ui">Função</b> e clica em <b class="ui">Adicionar</b>.</li>
           <li>A pessoa manda <code>/start</code> no bot e recebe: <em>“Olá, Nome! Pode mandar suas anotações por texto, foto ou áudio.”</em> Pronto.</li>
         </ol>
-        <div class="tip"><b>Funcionário, gerente ou gestor?</b> Funcionário manda recados (pelo Telegram ou pelo app) e não vê valores em R$ nem relatórios. Gerente e gestor também mandam, recebem os alertas críticos e os relatórios no Telegram, usam os comandos de resumo, corrigem o que qualquer pessoa lançou e podem ter acesso ao painel. Só o gestor libera e tira o acesso ao painel.</div>
+        <div class="tip"><b>Funcionário, gerente ou gestor?</b> Funcionário manda recados (pelo Telegram ou pelo app) e não vê valores em R$ nem relatórios. Gerente e gestor também mandam, recebem os alertas críticos e os relatórios no Telegram, usam os comandos de resumo, corrigem o que qualquer pessoa lançou e podem ter acesso ao painel. Só o gestor libera e tira o acesso ao painel. Valores em R$, financeiro, compras, administrativo e indicadores são só para gestor e gerente.</div>
       </section>
 
       <section id="bot">
@@ -263,6 +273,34 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <div><small>Consumo com destino</small>Usei 20 litros de diesel no gerador da sede.</div>
         </div>
         <p>Máquinas e insumos que ainda não existem no cadastro são criados na primeira vez que aparecem.</p>
+
+        <h3>Tarefas</h3>
+        <div class="say">
+          <div><small>Concluir</small>Terminei a cerca do pasto 3.</div>
+          <div><small>Criar (gestor ou gerente)</small>Pede pro João consertar a bomba do poço 2 até sexta.</div>
+        </div>
+        <p>O funcionário recebe a tarefa no app ou no Telegram e conclui por mensagem.</p>
+
+        <h3>Financeiro (só gestor e gerente)</h3>
+        <div class="say">
+          <div><small>Despesa</small>Paguei 2.300 de energia.</div>
+          <div><small>Receita</small>Recebi 12.000 da venda dos bezerros.</div>
+        </div>
+        <p>Compras de insumo com valor, vendas de lote e consertos com valor já viram lançamentos sozinhos. Quando um funcionário diz um valor, ele não aparece para ele e o gestor recebe um aviso para conferir.</p>
+
+        <h3>Reprodução</h3>
+        <div class="say">
+          <div><small>Cobertura</small>Cobri a vaca 12 com o touro 3. / Inseminei a vaca 20.</div>
+          <div><small>Diagnóstico de prenhez</small>A vaca 12 deu prenha no toque.</div>
+          <div><small>Suplementação</small>Coloquei 200 kg de sal mineral no pasto 4.</div>
+        </div>
+        <p>O parto continua sendo o nascimento da cria; ele fecha o ciclo da matriz.</p>
+
+        <h3>Administrativo (só gestor e gerente)</h3>
+        <div class="say">
+          <div><small>Decisão</small>Decidi vender os bezerros só em março.</div>
+          <div><small>Compromisso</small>Renovar o seguro do trator até 30/11.</div>
+        </div>
       </section>
 
       <section id="respostas">
@@ -299,13 +337,16 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <section id="comandos">
         <p class="eyebrow">Telegram</p>
         <h2>Comandos do gestor</h2>
-        <p>Resumos na hora, só para quem tem a função Gestor.</p>
+        <p>Resumos na hora, para gestor e gerente.</p>
         <div class="table-scroll"><table>
           <thead><tr><th>Comando</th><th>O que mostra</th></tr></thead>
           <tbody>
             <tr><td><code>/rebanho</code></td><td>Animais vivos por categoria, nascimentos na semana e no mês, crias por faixa de idade, descarte por motivo, mortes no mês e no ano.</td></tr>
             <tr><td><code>/maquinas</code></td><td>Quantas estão operando, as paradas com tempo e motivo, tempo médio parada em 90 dias.</td></tr>
             <tr><td><code>/insumos</code></td><td>Itens em falta ou abaixo do mínimo e faltas que se repetem.</td></tr>
+            <tr><td><code>/reproducao</code></td><td>Matrizes por situação, partos previstos, coberturas sem diagnóstico e indicadores da estação.</td></tr>
+            <tr><td><code>/sanidade</code></td><td>Vacinas e vermifugações vencidas ou a vencer, e animais em carência.</td></tr>
+            <tr><td><code>/agenda</code></td><td>Compromissos e documentos que vencem em breve.</td></tr>
             <tr><td><code>/lavoura</code></td><td>Lotes de plantação abertos, lançamentos dos últimos 7 dias, colheitas, pragas e colheitas previstas.</td></tr>
           </tbody>
         </table></div>
@@ -320,9 +361,15 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li><b>🌾 Colheita chegando:</b> às 7h, aviso dos lotes de plantação com colheita prevista nos próximos 7 dias.</li>
           <li><b>Revisão chegando:</b> às 7h05, aviso das máquinas que faltam menos de 10% do intervalo para a revisão preventiva, ou que já passaram.</li>
           <li><b>📦 Insumos vencendo:</b> às 7h10, aviso dos lotes de insumo que vencem nos próximos 30 dias. Cada lote é avisado uma vez.</li>
+          <li><b>Tarefa atrasada:</b> vira alerta para o gestor e o gerente.</li>
+          <li><b>Contas a vencer:</b> aviso das contas a pagar e a receber perto do vencimento.</li>
+          <li><b>Reprodução e sanidade (7h30):</b> partos previstos, coberturas sem diagnóstico e vacinas do calendário sanitário.</li>
+          <li><b>Agenda e documentos (7h40):</b> compromissos e documentos (CAR, licenças, seguros, GTA…) perto de vencer. Cada vencimento é avisado uma vez; renovar a data zera o aviso.</li>
+          <li><b>Fechamento do mês (dia 1, 7h45):</b> relatório mensal com financeiro, inventário, rebanho e produção, enviado a gestor e gerente e guardado em Relatórios.</li>
+          <li><b>Conferência da semana (segunda, 7h50):</b> lista de pendências, só quando há alguma. No último dia do mês, às 16h, vem o lembrete do fechamento.</li>
           <li><b>Conferir valor:</b> quando um funcionário diz um valor em R$, ele fica gravado e vira um alerta para o gestor conferir. O funcionário não vê valores nas respostas.</li>
         </ul>
-        <p>Alertas e relatórios só chegam para gestores ativos que já mandaram pelo menos uma mensagem ao bot.</p>
+        <p>Alertas e relatórios só chegam para gestores e gerentes ativos que já mandaram pelo menos uma mensagem ao bot.</p>
       </section>
 
       <section id="painel">
@@ -483,6 +530,88 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <div class="tip"><b>Estoque mínimo:</b> com ele preenchido, o insumo aparece como “Abaixo do mínimo” e entra nos alertas e no resumo <code>/insumos</code>.</div>
       </section>
 
+      <section id="tarefas">
+        <p class="eyebrow">Painel</p>
+        <h2>Tarefas</h2>
+        <p class="lead">O que cada pessoa precisa fazer, com prazo e local.</p>
+        <ul>
+          <li><b class="ui">Nova tarefa</b>: título, responsável, prazo e local (pasto, máquina, instalação…). Gestor e gerente criam pelo painel, pelo Telegram ou pelo app.</li>
+          <li>As abas mostram a lista de pendências e o calendário da semana. Tarefa atrasada vira alerta.</li>
+          <li>O funcionário vê só as dele no app (<b class="ui">Minhas tarefas</b>) e conclui por mensagem ou com um toque.</li>
+          <li>Em <a href="#equipe">Equipe</a>, informe a função de cada pessoa (tratorista, vaqueiro…).</li>
+          <li>O relatório semanal traz as tarefas concluídas e as pendentes.</li>
+        </ul>
+        <figure class="shot"><img src="img/tarefas-lista.jpg" alt="Tela de Tarefas com a lista de pendências" loading="lazy"><figcaption>Lista de tarefas. Dados de exemplo.</figcaption></figure>
+      </section>
+
+      <section id="financeiro">
+        <p class="eyebrow">Painel</p>
+        <h2>Financeiro</h2>
+        <p class="lead">Contas, caixa e resultado da fazenda. Só gestor e gerente veem esta tela.</p>
+        <ul>
+          <li><b class="ui">Contas</b>: a pagar e a receber, com vencimento, categoria (despesa fixa ou variável) e centro de custo (rebanho, lote, talhão, máquina, infraestrutura, administração). Marque como pago ou recebido.</li>
+          <li><b>Lançamentos automáticos:</b> entrada de insumo com preço vira despesa, venda de lote ou de animal vira receita, conserto com valor vira despesa da máquina. Eles aparecem marcados como automáticos.</li>
+          <li><b>Despesas recorrentes:</b> folha (salário e encargos por pessoa), energia, arrendamento.</li>
+          <li><b class="ui">Financiamentos</b>: empréstimos com as parcelas.</li>
+          <li><b class="ui">Fluxo de caixa</b>: realizado e previsto.</li>
+          <li><b class="ui">Resultado</b>: custo por hectare, por animal e por atividade, com resultado e margem de cada atividade e da fazenda.</li>
+        </ul>
+        <figure class="shot"><img src="img/financeiro-fluxo.jpg" alt="Tela de Financeiro com o fluxo de caixa" loading="lazy"><figcaption>Fluxo de caixa. Dados de exemplo.</figcaption></figure>
+      </section>
+
+      <section id="compras">
+        <p class="eyebrow">Painel</p>
+        <h2>Compras e vendas</h2>
+        <p class="lead">Fornecedores, compradores, pedidos, preços e contratos. Só gestor e gerente.</p>
+        <ul>
+          <li><b class="ui">Fornecedores e compradores</b>: cadastro de quem vende e de quem compra.</li>
+          <li><b class="ui">Pedidos</b>: o recebimento dá entrada no estoque e gera a conta a pagar. Reabrir um pedido é bloqueado se a conta já foi paga.</li>
+          <li><b class="ui">Preços</b>: histórico por produto e por fornecedor, e comparação de cotações.</li>
+          <li><b class="ui">Contratos de venda</b>: pesagem, frete e entrega. A entrega vira venda da plantação, com a receita.</li>
+          <li><b>Anexos:</b> foto da nota ou do comprovante fica ligada ao pedido, contrato ou conta. Pelo Telegram, a foto só é guardada quando vem de gestor ou gerente.</li>
+        </ul>
+        <figure class="shot"><img src="img/compras-pedidos.jpg" alt="Tela de Compras e vendas com os pedidos" loading="lazy"><figcaption>Pedidos de compra. Dados de exemplo.</figcaption></figure>
+      </section>
+
+      <section id="reproducao">
+        <p class="eyebrow">Painel</p>
+        <h2>Reprodução e nutrição</h2>
+        <p class="lead">Do manejo reprodutivo à suplementação e ao calendário de vacinas.</p>
+        <ul>
+          <li><b class="ui">Matrizes</b>: a situação de cada uma (vazia, coberta, prenha, parida) sai dos eventos registrados. Cobertura sem diagnóstico após 45 dias pede o toque; o parto é previsto 283 dias depois da cobertura.</li>
+          <li><b class="ui">Estações de monta</b>: período, coberturas, taxa de prenhez, natalidade, intervalo entre partos e matrizes vazias.</li>
+          <li><b class="ui">Suplementação</b>: o que foi fornecido em cada pasto e o consumo em kg por cabeça por dia. Dá baixa no estoque quando o insumo está em kg, t ou saco (saco de 25 kg).</li>
+          <li><b class="ui">Calendário sanitário</b>: vacinas e vermifugações obrigatórias, com a data seguinte calculada pela última aplicação em <a href="#sanidade">Sanidade</a>, sem lançar duas vezes.</li>
+        </ul>
+        <figure class="shot"><img src="img/reproducao-matrizes.jpg" alt="Tela de Reprodução com a situação das matrizes" loading="lazy"><figcaption>Situação das matrizes. Dados de exemplo.</figcaption></figure>
+      </section>
+
+      <section id="administrativo">
+        <p class="eyebrow">Painel</p>
+        <h2>Administrativo</h2>
+        <p class="lead">Propriedades, documentos, agenda e decisões. Só gestor e gerente.</p>
+        <ul>
+          <li><b class="ui">Propriedades</b>: mais de uma fazenda por cliente, com arrendamentos. Pastos e talhões ligam à propriedade. Arrendamento mensal vira conta recorrente no Financeiro.</li>
+          <li><b class="ui">Documentos</b>: arquivo e vencimento de CAR, CCIR, ITR, licenças ambientais, outorgas, GTA, seguros e licenciamento de veículos.</li>
+          <li><b class="ui">Agenda</b>: compromissos e obrigações com aviso antes do vencimento. Concluir uma obrigação que se repete cria a próxima.</li>
+          <li><b class="ui">Decisões</b>: anotações do gestor ligadas a um assunto, para consultar depois.</li>
+        </ul>
+        <figure class="shot"><img src="img/administrativo-agenda.jpg" alt="Tela Administrativo com a agenda de compromissos" loading="lazy"><figcaption>Agenda de compromissos. Dados de exemplo.</figcaption></figure>
+      </section>
+
+      <section id="indicadores">
+        <p class="eyebrow">Painel</p>
+        <h2>Indicadores</h2>
+        <p class="lead">Os números da fazenda, as metas e o fechamento do mês. Só gestor e gerente.</p>
+        <ul>
+          <li><b class="ui">Indicadores</b>: pecuária, rebanho, agricultura, estoque, máquinas, tarefas e finanças, filtrados por período.</li>
+          <li><b class="ui">Metas e rebanho</b>: metas anuais (nascimentos, mortes, vendas, compras, descartes e rebanho no fim do ano) comparadas ao realizado. A meta “no ritmo” compara o acumulado com a parte do ano já passada.</li>
+          <li><b class="ui">Orçamento</b>: valor previsto por categoria do financeiro. Uma linha anual vale 1/12 por mês.</li>
+          <li><b class="ui">Planejamento de safra</b>: por cultura, a área e a produção previstas, somando os lotes plantados na safra.</li>
+          <li><b class="ui">Rotina e fechamento</b>: o relatório mensal sai no dia 1 às 7h45 e fica guardado em <a href="#relatorios">Relatórios</a>. A conferência da semana avisa as pendências na segunda de manhã.</li>
+        </ul>
+      </section>
+
       <section id="alertas">
         <p class="eyebrow">Painel</p>
         <h2>Alertas</h2>
@@ -499,7 +628,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <section id="relatorios">
         <p class="eyebrow">Painel</p>
         <h2>Relatórios</h2>
-        <p>Todos os relatórios diários (18h) e semanais (segunda, 7h) escritos pela IA ficam guardados aqui. Clique em um da lista para ler. São os mesmos que os gestores recebem no Telegram.</p>
+        <p>Todos os relatórios diários (18h), semanais (segunda, 7h) e mensais (dia 1) escritos pela IA ficam guardados aqui. Clique em um da lista para ler. São os mesmos que os gestores recebem no Telegram.</p>
       </section>
 
       <section id="equipe">
@@ -507,7 +636,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <h2>Equipe</h2>
         <p>Quem pode usar o bot. Para liberar alguém, veja <a href="#comecar">Primeiro acesso</a>.</p>
         <ul>
-          <li><b class="ui">Editar</b> muda nome, ID do Telegram, função (funcionário, gerente ou gestor) e se a pessoa está ativa.</li>
+          <li><b class="ui">Editar</b> muda nome, ID do Telegram, função (tratorista, vaqueiro…), perfil (funcionário, gerente ou gestor) e se a pessoa está ativa.</li>
           <li><b class="ui">Acesso ao painel</b>: o gestor cria o e-mail e a senha de um gerente ou gestor para entrar no painel, e pode tirar o acesso. Funcionário não entra no painel.</li>
           <li>Desative quem saiu da fazenda: o bot para de aceitar as mensagens dessa pessoa, e o histórico fica.</li>
           <li>Se trocar o ID do Telegram, a pessoa precisa mandar uma mensagem ao bot para voltar a receber alertas e relatórios.</li>
