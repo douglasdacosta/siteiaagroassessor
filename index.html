@@ -64,10 +64,11 @@ a { color: inherit; }
 
 /* Topo */
 .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 22px; }
-.brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 900; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em; }
+.brand { flex: none; display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 900; font-size: 26px; text-transform: uppercase; letter-spacing: 0.02em; }
 .brand svg { width: 34px; height: 34px; flex: none; }
-.top nav { display: flex; gap: 22px; font-size: 15px; color: var(--muted); }
-.top nav a { text-decoration: none; }
+.top nav { display: flex; gap: 18px; font-size: 14.5px; color: var(--muted); min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.top nav::-webkit-scrollbar { display: none; }
+.top nav a { text-decoration: none; white-space: nowrap; }
 .top nav a:hover { color: var(--ink); }
 @media (max-width: 720px) { .top nav { display: none; } }
 
@@ -216,11 +217,10 @@ footer { padding-block: 40px 56px; color: var(--muted); font-size: 14px; display
     </div>
     <nav aria-label="Seções">
       <a href="#como">Como funciona</a>
-      <a href="#registra">O que registra</a>
+      <a href="#registra">Registros</a>
       <a href="#engorda">Engorda</a>
       <a href="#plantacoes">Plantações</a>
-      <a href="#modulos">Mais módulos</a>
-      <a href="#perfis">Perfis</a>
+      <a href="#modulos">Módulos</a>
       <a href="#gestor">Para o gestor</a>
       <a href="guia.html">Guia de uso</a>
       <a href="#contato">Contato</a>
