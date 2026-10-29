@@ -146,6 +146,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <p>Painel</p>
       <a href="#painel">Painel</a>
       <a href="#registros">Registros</a>
+      <a href="#a-completar">A completar</a>
       <a href="#rebanho">Rebanho</a>
       <a href="#sanidade">Sanidade</a>
       <a href="#engorda">Engorda</a>
@@ -176,7 +177,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <div class="cols">
           <a href="#comecar">Primeiro acesso</a><a href="#bot">Mandando recados</a><a href="#exemplos">Exemplos</a><a href="#respostas">Respostas</a>
           <a href="#audio">Áudios no bot</a><a href="#correcoes">Correções</a><a href="#comandos">Comandos</a><a href="#avisos">Alertas e relatórios</a>
-          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
+          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#a-completar">A completar</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
           <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#infraestrutura">Infraestrutura</a><a href="#insumos">Insumos</a><a href="#tarefas">Tarefas</a><a href="#financeiro">Financeiro</a><a href="#compras">Compras e vendas</a><a href="#reproducao">Reprodução</a><a href="#administrativo">Administrativo</a><a href="#indicadores">Indicadores</a><a href="#alertas">Alertas</a>
           <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a><a href="#configuracoes">Configurações</a>
           <a href="#custos">Custos</a><a href="#duvidas">Dúvidas</a>
@@ -310,7 +311,9 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <ul>
           <li><b>✅ Registrado:</b> cada registro vem numa linha, com o resumo do que foi entendido.</li>
           <li><b>ℹ️</b> mostra o que mudou nos cadastros (animal, máquina, estoque, lote) ou o que foi recusado.</li>
-          <li><b>❓</b> é uma pergunta: faltou algo para registrar. Responda na mensagem seguinte, em até 30 minutos, que o bot junta as duas.</li>
+          <li><b>❓</b> é uma pergunta: faltou algo para registrar (“Em qual lote?”, “Quantas cabeças tem o lote?”). Responda na mensagem seguinte, em até 30 minutos, que o bot junta as duas e faz o lançamento. No app de campo, dá para responder direto na pergunta.</li>
+          <li><b>📝 Anotado no histórico</b> aparece no lugar de “Registrado” quando o lançamento ficou guardado mas ainda não foi feito: falta a resposta a uma pergunta ou algo foi recusado (vem com ⚠️ e o motivo).</li>
+          <li><b>Cadastro novo:</b> se o lote, a área, a cultura, o insumo ou a máquina citados não existem, o bot cria e avisa, por exemplo <em>“Criei o lote provisório Novilhas separadas”</em> ou <em>“Cadastrei Ureia em Insumos (a completar)”</em>. O gestor confere na tela <a href="#a-completar">A completar</a>.</li>
           <li><em>“Recebido, mas não consegui identificar o registro. Pode detalhar?”</em> Mande de novo com mais detalhes.</li>
           <li><em>“⚠️ Não consegui processar sua mensagem agora. O gestor vai verificar no painel.”</em> Deu erro do nosso lado; o gestor vê no painel.</li>
         </ul>
@@ -403,7 +406,23 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>Filtre por categoria e por gravidade (Crítico, Atenção, Info) ou busque um item, como “trator 3” ou “vaca 50”.</li>
           <li>Cada linha mostra quando, a categoria, a gravidade, o item, o resumo e quem mandou.</li>
           <li>Nos áudios, aparece o texto transcrito e dá para ouvir a gravação.</li>
+          <li>Selos ao lado do resumo: <b>não gerou ação</b> (o sistema não conseguiu lançar, passe o mouse para ver o motivo), <b>aguardando resposta</b> (o bot fez uma pergunta a quem lançou) e <b>respondido depois</b> (a resposta veio numa mensagem seguinte, que fez o lançamento). O filtro de ação mostra só esses.</li>
         </ul>
+      </section>
+
+      <section id="a-completar">
+        <p class="eyebrow">Painel</p>
+        <h2>A completar</h2>
+        <p class="lead">Nenhum lançamento fica sem destino: quando a mensagem cita algo que ainda não está cadastrado, o bot cria o cadastro e ele aparece aqui para o gestor conferir.</p>
+        <ul>
+          <li><b>Lote de engorda:</b> com o nome dito (“Novilhas separadas”) ou “Lote padrão 1” quando não há lote aberto. Lote sem animais com brinco vale pela contagem de cabeças.</li>
+          <li><b>Plantações:</b> cultura que não está em Categorias, “Área padrão 1” (sem tamanho) quando a área não foi dita, e o lote da cultura quando chega uma aplicação ou colheita sem lote.</li>
+          <li><b>Insumo:</b> produto usado que não está no estoque. A baixa acontece e o estoque fica negativo até você lançar a entrada.</li>
+          <li><b>Máquina:</b> citada num lançamento e ainda não cadastrada.</li>
+        </ul>
+        <p>Em cada item: <b class="ui">Completar</b> abre a tela do cadastro, <b class="ui">Juntar</b> passa tudo para o cadastro certo quando era o mesmo com outro nome (por exemplo “Ureia” e “Ureia 45%”), e <b class="ui">Está certo</b> tira o item da lista. O número no menu mostra quantos faltam, os gestores recebem um aviso de manhã e o relatório traz o bloco “Lançamentos para conferir”.</p>
+        <figure class="shot"><img src="img/a-completar.jpg" alt="Tela A completar com um insumo, uma máquina, um lote de engorda e uma área criados pelo bot" loading="lazy"><figcaption>Tela A completar. Dados de exemplo.</figcaption></figure>
+        <div class="tip"><b>Dica:</b> uma mensagem cria no máximo 5 cadastros novos, para um áudio mal ouvido não encher a lista.</div>
       </section>
 
       <section id="rebanho">
@@ -461,6 +480,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p>Escolha <b class="ui">Por animal</b> (um peso para cada) ou <b class="ui">Lote inteiro</b> (peso total e cabeças pesadas). Uma pesagem na mesma data corrige a anterior.</p>
         <h3>Lançar manejo</h3>
         <p>Ração, vacina, medicamento ou outro manejo para todos os animais vivos do lote. Escolha o produto do estoque para dar baixa em Insumos. A quantidade é dividida por animal; vacina ou remédio sem quantidade conta um por animal. Excluir o manejo devolve ao estoque.</p>
+        <p>Lote criado pelo bot sem animais com brinco (por exemplo, “30 kg de ração para as 12 novilhas separadas”) é um lote <b>por contagem</b>: a divisão usa as cabeças ditas, que ficam guardadas para os próximos lançamentos.</p>
         <h3>Venda</h3>
         <p><b class="ui">Registrar venda</b> pede data, comprador, valor, peso e cabeças. O lote mostra o valor por cabeça, por kg e por arroba, e o resultado (venda menos os custos lançados). Os animais passam para vendido; <b class="ui">Reabrir lote</b> desfaz a venda. Use <b class="ui">Encerrar sem venda</b> quando o lote acaba de outro jeito.</p>
       </section>
