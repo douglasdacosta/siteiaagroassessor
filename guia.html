@@ -146,6 +146,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
       <p>Painel</p>
       <a href="#painel">Painel</a>
       <a href="#registros">Registros</a>
+      <a href="#origem">Origem dos lançamentos</a>
       <a href="#rebanho">Rebanho</a>
       <a href="#sanidade">Sanidade</a>
       <a href="#engorda">Engorda</a>
@@ -176,7 +177,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <div class="cols">
           <a href="#comecar">Primeiro acesso</a><a href="#bot">Mandando recados</a><a href="#exemplos">Exemplos</a><a href="#respostas">Respostas</a>
           <a href="#audio">Áudios no bot</a><a href="#correcoes">Correções</a><a href="#comandos">Comandos</a><a href="#avisos">Alertas e relatórios</a>
-          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
+          <a href="#painel">Painel</a><a href="#registros">Registros</a><a href="#origem">Origem</a><a href="#rebanho">Rebanho</a><a href="#sanidade">Sanidade</a><a href="#engorda">Engorda</a>
           <a href="#plantacoes">Plantações</a><a href="#maquinario">Maquinário</a><a href="#infraestrutura">Infraestrutura</a><a href="#insumos">Insumos</a><a href="#tarefas">Tarefas</a><a href="#financeiro">Financeiro</a><a href="#compras">Compras e vendas</a><a href="#reproducao">Reprodução</a><a href="#administrativo">Administrativo</a><a href="#indicadores">Indicadores</a><a href="#alertas">Alertas</a>
           <a href="#audios">Áudios</a><a href="#relatorios">Relatórios</a><a href="#equipe">Equipe</a><a href="#categorias">Categorias</a><a href="#configuracoes">Configurações</a>
           <a href="#custos">Custos</a><a href="#duvidas">Dúvidas</a>
@@ -404,6 +405,20 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>Cada linha mostra quando, a categoria, a gravidade, o item, o resumo e quem mandou.</li>
           <li>Nos áudios, aparece o texto transcrito e dá para ouvir a gravação.</li>
         </ul>
+      </section>
+
+      <section id="origem">
+        <p class="eyebrow">Painel</p>
+        <h2>Origem dos lançamentos</h2>
+        <p class="lead">Cada cadastro ou lançamento feito por mensagem guarda quem mandou, por onde e o que disse. Assim o gestor confere e, se tiver dúvida, sabe com quem conversar.</p>
+        <ul>
+          <li>Ao abrir um animal, uma máquina, um insumo, uma estrutura ou um lote, o bloco <strong>Origem do cadastro</strong> mostra o funcionário e a função dele, se veio pelo Telegram ou pelo app de campo, a data e hora, a frase que ele disse e o áudio ou a foto.</li>
+          <li>Vale também para o que o sistema cria sozinho. Por exemplo, a matriz que entra quando o áudio fala de um bezerro “da vaca 40” e a vaca 40 ainda não existia.</li>
+          <li>No <strong>Histórico de alterações</strong>, toda mudança feita por mensagem tem o link <strong>Ver mensagem</strong>.</li>
+          <li>Nos lançamentos (sanidade, reprodução, engorda, plantações, maquinário, insumos, financeiro, tarefas e alertas), o ícone de balão abre a mensagem que gerou a linha.</li>
+          <li>Só o gestor e os gerentes veem a origem, porque o painel é só deles. Os áudios e as fotos ficam guardados.</li>
+        </ul>
+        <figure class="shot"><img src="img/origem-cadastro.jpg" alt="Gaveta de um animal com o bloco Origem do cadastro: funcionário, canal, horário, frase transcrita e player do áudio" loading="lazy"><figcaption>Matriz criada a partir de um áudio do app de campo. Dados de exemplo.</figcaption></figure>
       </section>
 
       <section id="rebanho">
