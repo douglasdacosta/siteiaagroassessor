@@ -1,0 +1,5 @@
+# Site público: todos os buscadores e assistentes de IA podem ler.
+User-agent: *
+Allow: /
+
+Sitemap: https://iaagroassessor.com.br/sitemap.xml
