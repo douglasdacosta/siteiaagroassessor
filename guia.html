@@ -405,7 +405,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="eyebrow">Telegram</p>
         <h2>Alertas e relatórios</h2>
         <ul>
-          <li><b>Alerta crítico na hora:</b> máquina parada, animal ferido, doente ou morto, combustível acabou, problema em cerca, bomba, bebedouro ou outra instalação. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
+          <li><b>Alerta crítico na hora:</b> máquina parada (também quando a situação é mudada no painel), animal ferido, doente ou morto, combustível acabou, problema em cerca, bomba, bebedouro ou outra instalação. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
           <li><b>Relatório do dia</b> às 18h e <b>relatório da semana</b> na segunda às 7h, escritos pela IA. O semanal traz também os números do rebanho, das máquinas, dos insumos e da lavoura.</li>
           <li><b>🌾 Colheita chegando:</b> às 7h, aviso dos lotes de plantação com colheita prevista nos próximos 7 dias.</li>
           <li><b>Revisão chegando:</b> às 7h05, aviso das máquinas que faltam menos de 10% do intervalo para a revisão preventiva, ou que já passaram.</li>
@@ -488,7 +488,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="lead">Vacinas, vermífugos e tratamentos do rebanho, com baixa do produto em Insumos e controle de carência.</p>
         <ul>
           <li><b class="ui">Registrar aplicação</b>: tipo (vacina, vermífugo, tratamento ou outro), produto, dose por animal ou quantidade total, e onde foi aplicado: num pasto, numa categoria, em animais escolhidos pelo brinco ou no rebanho todo.</li>
-          <li>O produto sai do estoque. Excluir a aplicação devolve o produto.</li>
+          <li>Em <b class="ui">Produto de Insumos</b> aparecem os remédios e vacinas do estoque (ração, sal, semente, adubo, defensivo, combustível e peça ficam de fora). Para produto comprado na hora, escolha <b class="ui">Fora do estoque</b>.</li>
+          <li>O produto sai do estoque: informe a dose por animal ou o total gasto (em produto contado em dose, sai uma por animal). Excluir a aplicação devolve o produto.</li>
           <li><b class="ui">Não vender nem abater antes</b>: animais em carência e a data em que ela termina. A carência vem da aplicação ou do cadastro do produto em Insumos.</li>
         </ul>
         <p>Manejo de um lote de engorda inteiro continua na página <a href="#engorda">Engorda</a>.</p>
@@ -528,7 +529,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         </ul>
         <h3>Dentro do lote</h3>
         <ul>
-          <li><b class="ui">Lançamento</b>: plantio, adubação, defensivo, combustível, preparo do solo, irrigação, poda, tutoramento, praga ou doença. Com produto do estoque, dá baixa em Insumos; com máquina e horas, entra o custo da máquina.</li>
+          <li><b class="ui">Lançamento</b>: plantio, adubação, defensivo, combustível, preparo do solo, irrigação, poda, tutoramento, praga ou doença. Com produto do estoque, dá baixa em Insumos; com máquina e horas, entra o custo da máquina. Se a máquina estiver parada ou em manutenção, o painel pergunta se quer <b class="ui">Lançar mesmo assim</b> (o serviço pode ser de antes da quebra), e o bot registra e avisa. A área plantada do lote não passa da área do talhão, e a colheita prevista não pode ser antes do plantio.</li>
           <li><b class="ui">Colheita</b>: colheitas parciais somam no total do lote.</li>
           <li><b class="ui">+ Perda</b>: produção perdida por chuva, granizo, seca, praga ou na colheita, em quantidade ou em % do lote, com o motivo. O cartão Colhido e a tabela Por safra mostram as perdas e quanto elas representam do colhido mais o perdido.</li>
           <li><b class="ui">+ Venda</b>: o lote pode ter várias vendas. O resultado é vendas menos custos.</li>
@@ -545,7 +546,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>No alto: total de máquinas, paradas, em manutenção e tempo médio parada nos últimos 90 dias.</li>
           <li><b class="ui">Paradas agora</b> e <b class="ui">Mais ocorrências</b> mostram onde está o problema.</li>
           <li><b class="ui">Cadastrar máquina</b>: identificação, tipo, marca, modelo, ano, horímetro ou km e <b class="ui">Custo por hora (R$)</b>.</li>
-          <li>Clique numa máquina para editar, <b class="ui">Mudar situação</b> (operando, parada, em manutenção) com o motivo, e ver as ocorrências e alterações.</li>
+          <li>Clique numa máquina para editar, <b class="ui">Mudar situação</b> (operando, parada, em manutenção) com o motivo, e ver as ocorrências e alterações. A mudança entra em <a href="#registros">Registros</a>, e marcar como parada gera alerta crítico e avisa os gestores no Telegram, como quando vem do bot.</li>
+          <li>No abastecimento, horímetro ou km menor que o atual da máquina pede confirmação, para não estragar o cálculo de consumo.</li>
           <li><b>Abastecimentos:</b> litros, horímetro ou km e valor. O diesel sai do estoque e a máquina mostra a média de consumo (L/h ou km/L).</li>
           <li><b>Manutenções feitas:</b> revisão preventiva ou conserto, com peças, valor, horímetro e oficina.</li>
           <li><b>Revisão preventiva:</b> informe <b class="ui">A cada</b> (horas ou km) e a última revisão. A lista mostra a próxima revisão, o quanto falta, e o card <b class="ui">Revisão preventiva</b> junta as que estão vencidas ou perto de vencer.</li>
@@ -563,7 +565,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li><b class="ui">Cadastrar instalação</b>: identificação (ex.: “cerca do pasto 5”), tipo e local. Sem tipo, o sistema escolhe pelo nome.</li>
           <li>Clique numa instalação para editar, <b class="ui">Mudar situação</b> (funcionando, com problema, em manutenção) e <b class="ui">Lançar ocorrência</b>: problema ou manutenção feita, com material, valor e quem fez.</li>
         </ul>
-        <p>Quando alguém avisa no Telegram que algo quebrou, a situação vira “com problema” e o gestor recebe o alerta. Quando avisa que consertou, volta para “funcionando”.</p>
+        <p>Quando alguém avisa no Telegram que algo quebrou, a situação vira “com problema” e o gestor recebe o alerta. Marcar “com problema” ou lançar um problema pelo painel faz o mesmo: vira registro, alerta crítico e aviso aos gestores no Telegram. Quando avisa que consertou, volta para “funcionando”.</p>
       </section>
 
       <section id="insumos">
@@ -578,8 +580,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>Clique num insumo para <b class="ui">Ajustar estoque</b>:
             <ul>
               <li><b class="ui">Contagem</b> define o estoque com o que você contou;</li>
-              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio, e o lote e a validade se tiver);</li>
-              <li><b class="ui">Consumo</b> subtrai (informe o destino, como “horta” ou “sede”);</li>
+              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio, e o lote e a validade se tiver). Com valor, escolha <b class="ui">Já paguei</b> (vira despesa paga no Financeiro) ou <b class="ui">Pagar depois</b> com o vencimento (vira conta a pagar em aberto, que você baixa no Financeiro);</li>
+              <li><b class="ui">Consumo</b> subtrai (informe o destino, como “horta” ou “sede”). Se sair mais do que havia, o estoque fica negativo, em vermelho, até você lançar a entrada que faltou;</li>
               <li><b class="ui">Acabou</b> zera.</li>
             </ul>
           </li>
@@ -608,7 +610,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="lead">Contas, caixa e resultado da fazenda. Só gestor e gerente veem esta tela.</p>
         <ul>
           <li><b class="ui">Contas</b>: a pagar e a receber, com vencimento, categoria (despesa fixa ou variável) e centro de custo (rebanho, lote, talhão, máquina, infraestrutura, administração). Marque como pago ou recebido.</li>
-          <li><b>Lançamentos automáticos:</b> entrada de insumo com preço vira despesa, venda de lote ou de animal vira receita, conserto com valor vira despesa da máquina. Eles aparecem marcados como automáticos.</li>
+          <li><b>Lançamentos automáticos:</b> entrada de insumo com preço vira despesa paga, ou conta a pagar em aberto quando a entrada foi marcada como “pagar depois” (essa você baixa aqui), venda de lote ou de animal vira receita, conserto com valor vira despesa da máquina. Eles aparecem marcados como automáticos.</li>
           <li><b>Despesas recorrentes:</b> folha (salário e encargos por pessoa), energia, arrendamento.</li>
           <li><b class="ui">Financiamentos</b>: empréstimos com as parcelas.</li>
           <li><b class="ui">Fluxo de caixa</b>: realizado e previsto.</li>
@@ -636,8 +638,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <h2>Reprodução e nutrição</h2>
         <p class="lead">Do manejo reprodutivo à suplementação e ao calendário de vacinas.</p>
         <ul>
-          <li><b class="ui">Matrizes</b>: a situação de cada uma (vazia, coberta, prenha, parida) sai dos eventos registrados. Cobertura sem diagnóstico após 45 dias pede o toque; o parto é previsto 283 dias depois da cobertura.</li>
-          <li><b class="ui">Estações de monta</b>: período, coberturas, taxa de prenhez, natalidade, intervalo entre partos e matrizes vazias.</li>
+          <li><b class="ui">Matrizes</b>: a situação de cada uma (vazia, coberta, prenha, parida) sai dos eventos registrados. A matriz que pariu há até 120 dias e ainda não foi coberta de novo aparece como <b class="ui">parida</b>; depois disso volta a “sem cobertura”. Cobertura sem diagnóstico após 45 dias pede o toque; o parto é previsto 283 dias depois da cobertura.</li>
+          <li><b class="ui">Estações de monta</b>: período, coberturas, taxa de prenhez, natalidade (matrizes que pariram em relação às matrizes do rebanho, então gêmeos contam uma vez), intervalo entre partos e matrizes vazias.</li>
           <li><b class="ui">Suplementação</b>: o que foi fornecido em cada pasto e o consumo em kg por cabeça por dia. Dá baixa no estoque quando o insumo está em kg, t ou saco (saco de 25 kg).</li>
           <li><b class="ui">Calendário sanitário</b>: vacinas e vermifugações obrigatórias, com a data seguinte calculada pela última aplicação em <a href="#sanidade">Sanidade</a>, sem lançar duas vezes.</li>
         </ul>
@@ -649,7 +651,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <h2>Leite</h2>
         <p class="lead">Ordenhas, vacas em lactação, coletas do laticínio, leite fora do tanque, qualidade, mastite e o dinheiro do leite. A equipe lança pelo Telegram ou pelo app.</p>
         <h3>Comece pela Configuração</h3>
-        <p>Até o gestor salvar <b class="ui">Leite &gt; Configuração</b>, nenhuma vaca entra em lactação. Assim a fazenda só de corte não vê vaca de leite.</p>
+        <p>Até o gestor salvar <b class="ui">Leite &gt; Configuração</b>, nenhuma vaca entra em lactação e o painel não deixa lançar ordenha à mão. Assim a fazenda só de corte não vê vaca de leite. O número de vacas de uma ordenha também não pode passar das matrizes vivas do rebanho de leite.</p>
         <ul>
           <li><b class="ui">Tipo de ordenha</b>: balde ao pé (manual), ordenhadeira balde ao pé, canalizada, canalizada com medidor por vaca ou robô.</li>
           <li><b class="ui">Ordenhas por dia</b> e o nome do <b class="ui">Laticínio</b>.</li>
@@ -742,6 +744,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
             <tr><td>Tipos de instalação</td><td>Cerca, curral, bebedouro, poço, bomba, estrada… com palavras que ajudam o bot a reconhecer pelo nome.</td></tr>
             <tr><td>Motivos de descarte</td><td>Vazia, idade, mastite e outros.</td></tr>
             <tr><td>Categorias de insumo</td><td>Ração, sal, semente, adubo, defensivo, remédio, combustível, peça, com palavras que ajudam a escolher a categoria pelo nome.</td></tr>
+            <tr><td>Categorias financeiras</td><td>As categorias do <a href="#financeiro">Financeiro</a>. Cada uma é de despesa ou de receita; fixa ou variável entra no resultado. As palavras-chave ajudam a escolher a categoria pela descrição (“luz” vira Energia).</td></tr>
             <tr><td>Unidades de insumo</td><td>Litro, kg, saco, unidade, com os sinônimos que a equipe fala.</td></tr>
             <tr><td>Culturas</td><td>Soja, milho, café, laranja, tomate… com o ciclo e a unidade de colheita (sacas, toneladas, caixas, kg).</td></tr>
             <tr><td>Lançamentos de plantação</td><td>Os tipos de lançamento, com exemplos que ajudam o bot.</td></tr>
