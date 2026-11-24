@@ -405,7 +405,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="eyebrow">Telegram</p>
         <h2>Alertas e relatórios</h2>
         <ul>
-          <li><b>Alerta crítico na hora:</b> máquina parada, animal ferido, doente ou morto, combustível acabou, problema em cerca, bomba, bebedouro ou outra instalação. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
+          <li><b>Alerta crítico na hora:</b> máquina parada (também quando a situação é mudada no painel), animal ferido, doente ou morto, combustível acabou, problema em cerca, bomba, bebedouro ou outra instalação. Vai para todos os gestores: <em>“🚨 Alerta: …”</em> com quem mandou e a hora.</li>
           <li><b>Relatório do dia</b> às 18h e <b>relatório da semana</b> na segunda às 7h, escritos pela IA. O semanal traz também os números do rebanho, das máquinas, dos insumos e da lavoura.</li>
           <li><b>🌾 Colheita chegando:</b> às 7h, aviso dos lotes de plantação com colheita prevista nos próximos 7 dias.</li>
           <li><b>Revisão chegando:</b> às 7h05, aviso das máquinas que faltam menos de 10% do intervalo para a revisão preventiva, ou que já passaram.</li>
@@ -488,7 +488,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="lead">Vacinas, vermífugos e tratamentos do rebanho, com baixa do produto em Insumos e controle de carência.</p>
         <ul>
           <li><b class="ui">Registrar aplicação</b>: tipo (vacina, vermífugo, tratamento ou outro), produto, dose por animal ou quantidade total, e onde foi aplicado: num pasto, numa categoria, em animais escolhidos pelo brinco ou no rebanho todo.</li>
-          <li>O produto sai do estoque. Excluir a aplicação devolve o produto.</li>
+          <li>Em <b class="ui">Produto de Insumos</b> aparecem os remédios e vacinas do estoque (ração, sal, semente, adubo, defensivo, combustível e peça ficam de fora). Para produto comprado na hora, escolha <b class="ui">Fora do estoque</b>.</li>
+          <li>O produto sai do estoque: informe a dose por animal ou o total gasto (em produto contado em dose, sai uma por animal). Excluir a aplicação devolve o produto.</li>
           <li><b class="ui">Não vender nem abater antes</b>: animais em carência e a data em que ela termina. A carência vem da aplicação ou do cadastro do produto em Insumos.</li>
         </ul>
         <p>Manejo de um lote de engorda inteiro continua na página <a href="#engorda">Engorda</a>.</p>
@@ -545,7 +546,8 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>No alto: total de máquinas, paradas, em manutenção e tempo médio parada nos últimos 90 dias.</li>
           <li><b class="ui">Paradas agora</b> e <b class="ui">Mais ocorrências</b> mostram onde está o problema.</li>
           <li><b class="ui">Cadastrar máquina</b>: identificação, tipo, marca, modelo, ano, horímetro ou km e <b class="ui">Custo por hora (R$)</b>.</li>
-          <li>Clique numa máquina para editar, <b class="ui">Mudar situação</b> (operando, parada, em manutenção) com o motivo, e ver as ocorrências e alterações.</li>
+          <li>Clique numa máquina para editar, <b class="ui">Mudar situação</b> (operando, parada, em manutenção) com o motivo, e ver as ocorrências e alterações. A mudança entra em <a href="#registros">Registros</a>, e marcar como parada gera alerta crítico e avisa os gestores no Telegram, como quando vem do bot.</li>
+          <li>No abastecimento, horímetro ou km menor que o atual da máquina pede confirmação, para não estragar o cálculo de consumo.</li>
           <li><b>Abastecimentos:</b> litros, horímetro ou km e valor. O diesel sai do estoque e a máquina mostra a média de consumo (L/h ou km/L).</li>
           <li><b>Manutenções feitas:</b> revisão preventiva ou conserto, com peças, valor, horímetro e oficina.</li>
           <li><b>Revisão preventiva:</b> informe <b class="ui">A cada</b> (horas ou km) e a última revisão. A lista mostra a próxima revisão, o quanto falta, e o card <b class="ui">Revisão preventiva</b> junta as que estão vencidas ou perto de vencer.</li>
@@ -578,7 +580,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
           <li>Clique num insumo para <b class="ui">Ajustar estoque</b>:
             <ul>
               <li><b class="ui">Contagem</b> define o estoque com o que você contou;</li>
-              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio, e o lote e a validade se tiver);</li>
+              <li><b class="ui">Entrada</b> soma (informe o <b class="ui">Valor total da compra</b> para formar o custo médio, e o lote e a validade se tiver). Com valor, escolha <b class="ui">Já paguei</b> (vira despesa paga no Financeiro) ou <b class="ui">Pagar depois</b> com o vencimento (vira conta a pagar em aberto, que você baixa no Financeiro);</li>
               <li><b class="ui">Consumo</b> subtrai (informe o destino, como “horta” ou “sede”);</li>
               <li><b class="ui">Acabou</b> zera.</li>
             </ul>
@@ -608,7 +610,7 @@ footer { padding-block: 32px 56px; color: var(--muted); font-size: 14px; display
         <p class="lead">Contas, caixa e resultado da fazenda. Só gestor e gerente veem esta tela.</p>
         <ul>
           <li><b class="ui">Contas</b>: a pagar e a receber, com vencimento, categoria (despesa fixa ou variável) e centro de custo (rebanho, lote, talhão, máquina, infraestrutura, administração). Marque como pago ou recebido.</li>
-          <li><b>Lançamentos automáticos:</b> entrada de insumo com preço vira despesa, venda de lote ou de animal vira receita, conserto com valor vira despesa da máquina. Eles aparecem marcados como automáticos.</li>
+          <li><b>Lançamentos automáticos:</b> entrada de insumo com preço vira despesa paga, ou conta a pagar em aberto quando a entrada foi marcada como “pagar depois” (essa você baixa aqui), venda de lote ou de animal vira receita, conserto com valor vira despesa da máquina. Eles aparecem marcados como automáticos.</li>
           <li><b>Despesas recorrentes:</b> folha (salário e encargos por pessoa), energia, arrendamento.</li>
           <li><b class="ui">Financiamentos</b>: empréstimos com as parcelas.</li>
           <li><b class="ui">Fluxo de caixa</b>: realizado e previsto.</li>
